@@ -1,5 +1,5 @@
-import { getTokenAllowance } from 'functions/fetch-data/get-token-allowance';
-import { CheckIsTokenApprovedArgs } from 'types/approval';
+import { getTokenAllowance } from 'functions/fetch-data/approval/get-token-allowance';
+import { CheckIsTokenApprovedArgs } from 'types/approve-token';
 
 /**
  * Check if token is approved for a given owner and spender

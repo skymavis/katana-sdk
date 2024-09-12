@@ -2,7 +2,7 @@ import { PERMIT2_ADDRESS } from '@axieinfinity/sdk-core';
 import ERC20_ABI from 'abis/ERC20.json';
 import { Erc20 } from 'contracts';
 import { BigNumber } from 'ethers';
-import { GetTokenAllowanceArgs } from 'types/approval';
+import { GetTokenAllowanceArgs } from 'types/approve-token';
 import { checkAddress } from 'utils/address';
 import { getContract } from 'utils/contract';
 import { getRoninReadProvider } from 'utils/provider';

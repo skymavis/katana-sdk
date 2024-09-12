@@ -2,7 +2,7 @@ import { PERMIT2_ADDRESS } from '@axieinfinity/sdk-core';
 import ERC20_ABI from 'abis/ERC20.json';
 import { Erc20 } from 'contracts';
 import { ContractTransaction } from 'ethers';
-import { ApproveTokenArgs } from 'types/approval';
+import { ApproveTokenArgs } from 'types/approve-token';
 import { getContract } from 'utils/contract';
 import { didUserReject, UserRejectedRequestError } from 'utils/errors';
 

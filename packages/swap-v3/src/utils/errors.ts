@@ -11,6 +11,14 @@ class WrongChainError extends Error {
   }
 }
 
+class QueryFailError extends Error {
+  public constructor(message?: string) {
+    super();
+    this.name = 'QueryFailError';
+    this.message = message ?? 'Cannot query to Katana GraphQL';
+  }
+}
+
 function getReasonFromError(error: any): string | undefined {
   let reason: string | undefined;
   while (error) {
@@ -53,4 +61,11 @@ function toReadableError(errorText: string, error: unknown) {
   return new Error(`${errorText} 👺 ${error}`);
 }
 
-export { didUserReject, getReasonFromError, toReadableError, UserRejectedRequestError, WrongChainError };
+export {
+  didUserReject,
+  getReasonFromError,
+  QueryFailError,
+  toReadableError,
+  UserRejectedRequestError,
+  WrongChainError,
+};

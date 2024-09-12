@@ -1,6 +1,6 @@
-import { AddressZero } from '@ethersproject/constants';
-import { Contract, ContractInterface } from '@ethersproject/contracts';
 import { JsonRpcSigner, Provider, StaticJsonRpcProvider, Web3Provider } from '@ethersproject/providers';
+import { ZERO_ADDRESS } from 'constants/misc';
+import { Contract, ContractInterface } from 'ethers';
 
 import { checkAddress } from './address';
 
@@ -16,7 +16,7 @@ type GetContractArgs = {
 };
 
 const getContract = ({ address, ABI, provider, account }: GetContractArgs): Contract | null => {
-  if (!checkAddress(address) || address === AddressZero) {
+  if (!checkAddress(address) || address === ZERO_ADDRESS) {
     return null;
   }
 

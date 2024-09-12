@@ -1,1 +1,5 @@
-export const AVERAGE_RONIN_L1_BLOCK_TIME = 3000; // 3 seconds in milliseconds
+const AVERAGE_RONIN_L1_BLOCK_TIME = 3000; // 3 seconds in milliseconds
+
+const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
+
+export { AVERAGE_RONIN_L1_BLOCK_TIME, ZERO_ADDRESS };
