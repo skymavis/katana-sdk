@@ -23,6 +23,13 @@ const config = defineConfig({
     '@walletconnect/ethereum-provider',
     '@ethersproject/providers',
     '@ethersproject/hash',
+    '@axieinfinity/sdk-core',
+    'tiny-invariant',
+    'jsbi',
+    '@uniswap/router-sdk',
+    '@uniswap/sdk-core',
+    '@uniswap/v2-sdk',
+    '@uniswap/v3-sdk',
   ],
   plugins: [
     json(),

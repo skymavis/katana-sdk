@@ -1,5 +1,6 @@
 import { ChainId } from 'configs/chain';
-import { getTokenBalances } from 'functions/fetch-data/balance';
+import { BigNumber } from 'ethers';
+import { getRonBalance, getTokenBalances } from 'functions/fetch-data/balance';
 
 type CheckIsInsufficientBalanceArgs = {
   chainId: ChainId;
@@ -9,24 +10,44 @@ type CheckIsInsufficientBalanceArgs = {
 };
 
 /**
- * Utility function to check if the balance is insufficient for the requested amount
+ * Utility function to check if the erc20 balance is insufficient for the requested amount
  * @param chainId - Chain ID
  * @param account - Account address
  * @param tokenAddress - Token address
  * @param rawAmount - Requested amount in raw format
- * @returns
+ * @returns Object with token balance and isInsufficient flag
  */
 const checkIsInsufficientBalance = async ({
   account,
   chainId,
   rawAmount,
   tokenAddress,
-}: CheckIsInsufficientBalanceArgs): Promise<boolean> => {
+}: CheckIsInsufficientBalanceArgs): Promise<{ tokenBalance?: BigNumber; isInsufficient: boolean }> => {
   const balances = await getTokenBalances({ account, chainId, tokens: [tokenAddress] });
   if (!balances || !balances[tokenAddress]) {
-    return false;
+    return { isInsufficient: true };
   }
-  return balances?.[tokenAddress]?.lt(rawAmount) ?? false;
+  return {
+    tokenBalance: balances?.[tokenAddress] ?? undefined,
+    isInsufficient: balances?.[tokenAddress]?.lt(rawAmount) ?? true,
+  };
 };
 
-export { checkIsInsufficientBalance };
+type CheckIsInsufficientRonBalanceArgs = {
+  chainId: ChainId;
+  account: string;
+  rawAmount: string;
+};
+const checkIsInsufficientRonBalance = async ({
+  account,
+  chainId,
+  rawAmount,
+}: CheckIsInsufficientRonBalanceArgs): Promise<{ ronBalance?: BigNumber; isInsufficient: boolean }> => {
+  const balance = await getRonBalance({ account, chainId });
+  if (!balance) {
+    return { isInsufficient: true };
+  }
+  return { ronBalance: balance, isInsufficient: balance?.lt(rawAmount) ?? true };
+};
+
+export { checkIsInsufficientBalance, checkIsInsufficientRonBalance };

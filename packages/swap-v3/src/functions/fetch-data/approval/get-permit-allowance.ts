@@ -1,6 +1,5 @@
 import { UNIVERSAL_ROUTER_ADDRESS } from '@axieinfinity/sdk-core';
-import PERMIT2_ABI from 'abis/permit2.json';
-import { Permit2 } from 'contracts';
+import { Permit2, Permit2__factory } from 'contracts';
 import { BigNumber } from 'ethers';
 import { GetPermitAllowanceArgs } from 'types/permit';
 import { checkAddress } from 'utils/address';
@@ -33,7 +32,7 @@ const getPermitAllowance = async ({
 
   const contract = getContract({
     address: tokenAddress,
-    ABI: PERMIT2_ABI,
+    ABI: Permit2__factory.createInterface(),
     provider: getRoninReadProvider(chainId),
   }) as Permit2;
 

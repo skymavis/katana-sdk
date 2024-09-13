@@ -1,6 +1,5 @@
 import { PERMIT2_ADDRESS } from '@axieinfinity/sdk-core';
-import ERC20_ABI from 'abis/ERC20.json';
-import { Erc20 } from 'contracts';
+import { Erc20, Erc20__factory } from 'contracts';
 import { BigNumber } from 'ethers';
 import { GetTokenAllowanceArgs } from 'types/approve-token';
 import { checkAddress } from 'utils/address';
@@ -29,7 +28,7 @@ const getTokenAllowance = async ({
 
   const contract = getContract({
     address: tokenAddress,
-    ABI: ERC20_ABI,
+    ABI: Erc20__factory.createInterface(),
     provider: getRoninReadProvider(chainId),
   }) as Erc20;
 

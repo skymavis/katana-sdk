@@ -44,4 +44,4 @@ function swapErrorToUserReadableMessage(error: any): string {
   }
 }
 
-export { didUserReject, swapErrorToUserReadableMessage };
+export { swapErrorToUserReadableMessage };

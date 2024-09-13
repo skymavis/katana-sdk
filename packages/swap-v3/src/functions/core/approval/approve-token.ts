@@ -1,6 +1,5 @@
 import { PERMIT2_ADDRESS } from '@axieinfinity/sdk-core';
-import ERC20_ABI from 'abis/ERC20.json';
-import { Erc20 } from 'contracts';
+import { Erc20, Erc20__factory } from 'contracts';
 import { ContractTransaction } from 'ethers';
 import { ApproveTokenArgs } from 'types/approve-token';
 import { getContract } from 'utils/contract';
@@ -31,7 +30,7 @@ const approveToken = async ({
 
   const contract = getContract({
     address: tokenAddress,
-    ABI: ERC20_ABI,
+    ABI: Erc20__factory.createInterface(),
     provider: wallet.provider,
     account: wallet.account,
   }) as Erc20;

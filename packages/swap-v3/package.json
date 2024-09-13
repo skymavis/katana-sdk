@@ -29,6 +29,7 @@
     "@axieinfinity/sdk-core": "0.0.8",
     "typescript": "4.9.4",
     "@uniswap/permit2-sdk": "1.2.1",
+    "@uniswap/router-sdk": "1.9.3",
     "@walletconnect/ethereum-provider": "2.16.1",
     "axios": "1.6.0"
   },

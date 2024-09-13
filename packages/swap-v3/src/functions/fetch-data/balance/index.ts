@@ -1,7 +1,9 @@
 import { ChainId } from 'configs/chain';
-import { Erc20__factory } from 'contracts';
+import { MULTICALL2_ADDRESSES } from 'constants/address';
+import { Erc20__factory, Multicall2, Multicall2__factory } from 'contracts';
 import { BigNumber } from 'ethers';
 import { checkAddress } from 'utils/address';
+import { getContract } from 'utils/contract';
 import { multipleContractSingleData } from 'utils/multicall';
 import { getRoninReadProvider } from 'utils/provider';
 
@@ -61,4 +63,37 @@ const getTokenBalances = async ({
   }, {});
 };
 
-export { getTokenBalances };
+type GetRonBalanceArgs = {
+  account: string;
+  chainId: ChainId;
+};
+
+/**
+ * Get RON balance for a given account
+ * @param account - Account address
+ * @param chainId - Chain ID
+ * @returns RON balance
+ */
+const getRonBalance = async ({ chainId, account }: GetRonBalanceArgs) => {
+  if (!chainId) {
+    throw new Error('Chain ID is required');
+  }
+  if (!account) {
+    throw new Error('Account is required');
+  }
+
+  const multicallContract = getContract({
+    address: MULTICALL2_ADDRESSES[chainId],
+    ABI: Multicall2__factory.createInterface(),
+    provider: getRoninReadProvider(chainId),
+    account: account,
+  }) as Multicall2;
+
+  if (!multicallContract) {
+    throw new Error('Cannot get contract');
+  }
+
+  return multicallContract.getRonBalance(account);
+};
+
+export { getRonBalance, getTokenBalances };
