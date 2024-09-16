@@ -1,12 +1,11 @@
-import { Currency, CurrencyAmount, TradeType } from '@axieinfinity/sdk-core';
 import { MixedRouteSDK, Trade } from '@uniswap/router-sdk';
-import { Price } from '@uniswap/sdk-core';
+import { Currency, CurrencyAmount, Price, TradeType } from '@uniswap/sdk-core';
 import { Route as V2Route } from '@uniswap/v2-sdk';
 import { Route as V3Route } from '@uniswap/v3-sdk';
 
 import { SwapFeeInfo } from './routing-api';
 
-class ClassicTrade extends Trade<Currency, Currency, TradeType> {
+class KatanaTrade extends Trade<Currency, Currency, TradeType> {
   blockNumber: string | null | undefined;
   requestId: string | undefined;
   swapFee: SwapFeeInfo | undefined;
@@ -72,4 +71,4 @@ class ClassicTrade extends Trade<Currency, Currency, TradeType> {
   }
 }
 
-export { ClassicTrade };
+export { KatanaTrade };

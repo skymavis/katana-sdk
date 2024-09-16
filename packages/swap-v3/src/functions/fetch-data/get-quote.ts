@@ -1,6 +1,5 @@
-import { TradeType } from '@axieinfinity/sdk-core';
 import axios from 'axios';
-import { SWAP_DEFAULT_SLIPPAGE } from 'constants/misc';
+import { DEFAULT_SWAP_SLIPPAGE } from 'constants/misc';
 import { KATANA_ROUTING_API_URL } from 'constants/url';
 import { ClassicQuoteData, GetQuoteArgs, QuoteQueryParams, TradeResult } from 'types/routing-api';
 import { isTradeTypeExactInput, QuoteState, transformQuoteToTrade } from 'utils/routing-api';
@@ -38,7 +37,7 @@ const getQuote = async (args: GetQuoteArgs): Promise<TradeResult> => {
       enableUniversalRouter: true,
       enableFeeOnTransferFeeFetching: true,
       protocols: ['v2', 'v3', 'mixed'],
-      slippageTolerance: SWAP_DEFAULT_SLIPPAGE.toSignificant(),
+      slippageTolerance: DEFAULT_SWAP_SLIPPAGE.toSignificant(),
       ...restProps,
     };
 
@@ -72,4 +71,4 @@ const getQuote = async (args: GetQuoteArgs): Promise<TradeResult> => {
   }
 };
 
-export { getQuote, QuoteIntent, QuoteState, TradeType };
+export { getQuote, QuoteIntent, QuoteState };

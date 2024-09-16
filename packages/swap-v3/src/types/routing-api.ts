@@ -1,10 +1,11 @@
-import { ChainId, Currency, CurrencyAmount, Percent, Token, TradeType } from '@axieinfinity/sdk-core';
+import { ChainId, Currency, CurrencyAmount, Token, TradeType } from '@axieinfinity/sdk-core';
 import { MixedRouteSDK } from '@uniswap/router-sdk';
+import { Percent } from '@uniswap/sdk-core';
 import { Route as V2Route } from '@uniswap/v2-sdk';
 import { Route as V3Route } from '@uniswap/v3-sdk';
 import { QuoteIntent, QuoteState } from 'functions/fetch-data/get-quote';
 
-import { ClassicTrade } from './classic-trade';
+import { KatanaTrade } from './katana-trade';
 
 type TradeTypeParam = 'exactIn' | 'exactOut';
 
@@ -135,7 +136,7 @@ type TradeResult =
     }
   | {
       state: QuoteState.SUCCESS;
-      trade: ClassicTrade;
+      trade: KatanaTrade;
     };
 
 type RouteResult = {

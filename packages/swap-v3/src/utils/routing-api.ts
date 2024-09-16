@@ -6,7 +6,7 @@ import { BIPS_BASE } from 'constants/misc';
 import { DEFAULT_ERC20_DECIMALS } from 'constants/tokens';
 import { RON } from 'constants/tokens/ron';
 import { BigNumber } from 'ethers';
-import { ClassicTrade } from 'types/classic-trade';
+import { KatanaTrade } from 'types/katana-trade';
 import {
   ClassicQuoteData,
   GetQuoteArgs,
@@ -206,7 +206,7 @@ const transformQuoteToTrade = (args: GetQuoteArgs, data: ClassicQuoteData): Trad
   const { tradeType } = args;
   const { gasUseEstimateUSD, blockNumber, routes, gasUseEstimate, swapFee } = getClassicTradeDetails(args, data);
 
-  const classicTrade = new ClassicTrade({
+  const classicTrade = new KatanaTrade({
     v2Routes:
       routes
         ?.filter(

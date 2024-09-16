@@ -19,6 +19,13 @@ class QueryFailError extends Error {
   }
 }
 
+/** Thrown when gas estimation fails. This class of error usually requires an emulator to determine the root cause. */
+class GasEstimationError extends Error {
+  constructor() {
+    super('Your swap is expected to fail.');
+  }
+}
+
 function getReasonFromError(error: any): string | undefined {
   let reason: string | undefined;
   while (error) {
@@ -63,6 +70,7 @@ function toReadableError(errorText: string, error: unknown) {
 
 export {
   didUserReject,
+  GasEstimationError,
   getReasonFromError,
   QueryFailError,
   toReadableError,
