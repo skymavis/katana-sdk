@@ -1,8 +1,8 @@
 {
-  "name": "@sky-mavis/swap-v3",
+  "name": "@sky-mavis/katana-core",
   "type": "module",
   "version": "0.0.1",
-  "description": "Katana SDK",
+  "description": "Katana SDK core",
   "main": "./dist/index.js",
   "types": "./dist/types/index.d.ts",
   "scripts": {

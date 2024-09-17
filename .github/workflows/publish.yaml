@@ -6,7 +6,7 @@ on:
 
 jobs:
   publish:
-    if: ${{ true == startsWith(github.event.release.tag_name, 'swap-v3') }}
+    if: ${{ true == startsWith(github.event.release.tag_name, 'katana-core') }}
     runs-on: ubuntu-latest
     environment: npm-production
 
@@ -24,12 +24,12 @@ jobs:
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_PUBLISH_TOKEN }}" >> .npmrc
 
       - name: Install dependencies
-        run: cd packages/swap-v3 && yarn
+        run: cd packages/katana-core && yarn
 
       - name: Build
-        run: cd packages/swap-v3 && yarn build
+        run: cd packages/katana-core && yarn build
 
-      - name: Publish @sky-mavis/katana-sdk/swap-v3
-        run: cd packages/swap-v3 && npm publish --access=public
+      - name: Publish @sky-mavis/katana-sdk/katana-core
+        run: cd packages/katana-core && npm publish --access=public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
