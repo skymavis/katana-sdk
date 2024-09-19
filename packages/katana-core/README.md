@@ -421,6 +421,6 @@ const { nonce } = await getPermitAllowance({
 const permit = createPermitObj({
     chainId: ChainId.mainnet,
     token: DEFAULT_ERC20[chainId].AXS.address,
-    nonce //
+    nonce
 })
 ```
