@@ -6,7 +6,7 @@ type CheckIsInsufficientBalanceArgs = {
   chainId: ChainId;
   tokenAddress: string;
   account: string;
-  rawAmount: string;
+  amount: string;
 };
 
 /**
@@ -14,14 +14,14 @@ type CheckIsInsufficientBalanceArgs = {
  * @param chainId - Chain ID
  * @param account - Account address
  * @param tokenAddress - Token address
- * @param rawAmount - Requested amount in raw format
+ * @param amount - Requested amount in raw format
  * @returns Object with token balance and isInsufficient flag
  */
 const checkIsInsufficientBalance = async ({
-  account,
   chainId,
-  rawAmount,
+  account,
   tokenAddress,
+  amount,
 }: CheckIsInsufficientBalanceArgs): Promise<{ tokenBalance?: BigNumber; isInsufficient: boolean }> => {
   const balances = await getTokenBalances({ account, chainId, tokens: [tokenAddress] });
   if (!balances || !balances[tokenAddress]) {
@@ -29,25 +29,33 @@ const checkIsInsufficientBalance = async ({
   }
   return {
     tokenBalance: balances?.[tokenAddress] ?? undefined,
-    isInsufficient: balances?.[tokenAddress]?.lt(rawAmount) ?? true,
+    isInsufficient: balances?.[tokenAddress]?.lt(amount) ?? true,
   };
 };
 
 type CheckIsInsufficientRonBalanceArgs = {
   chainId: ChainId;
   account: string;
-  rawAmount: string;
+  amount: string;
 };
+
+/**
+ * Utility function to check if the ron balance is insufficient for the requested amount
+ * @param chainId - Chain ID
+ * @param account - Account address
+ * @param amount - Requested amount in raw format
+ * @returns Object with token balance and isInsufficient flag
+ */
 const checkIsInsufficientRonBalance = async ({
-  account,
   chainId,
-  rawAmount,
+  account,
+  amount,
 }: CheckIsInsufficientRonBalanceArgs): Promise<{ ronBalance?: BigNumber; isInsufficient: boolean }> => {
   const balance = await getRonBalance({ account, chainId });
   if (!balance) {
     return { isInsufficient: true };
   }
-  return { ronBalance: balance, isInsufficient: balance?.lt(rawAmount) ?? true };
+  return { ronBalance: balance, isInsufficient: balance?.lt(amount) ?? true };
 };
 
 export { checkIsInsufficientBalance, checkIsInsufficientRonBalance };

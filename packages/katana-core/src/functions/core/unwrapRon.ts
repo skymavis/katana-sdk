@@ -16,23 +16,11 @@ type UnWrapRonArgs = {
 
 /**
  * Wrap WRON to RON
- * @param wallet - Wallet info
  * @param chainId - Chain id
+ * @param wallet - Wallet info
  * @param amount - Amount to unwrap
  */
 const unwrapRon = async ({ amount, chainId, wallet }: UnWrapRonArgs): Promise<ContractTransaction> => {
-  if (!wallet || !wallet?.account || !wallet?.provider) {
-    throw new Error('Wallet is required');
-  }
-
-  if (!amount) {
-    throw new Error('Amount is required');
-  }
-
-  if (!chainId) {
-    throw new Error('ChainId is required');
-  }
-
   const parsedAmount = tryParseCurrencyAmount(amount, RON.onChain(chainId));
 
   if (!parsedAmount) {
@@ -42,7 +30,7 @@ const unwrapRon = async ({ amount, chainId, wallet }: UnWrapRonArgs): Promise<Co
   const { isInsufficient: isInsufficientRonBalance, ronBalance } = await checkIsInsufficientRonBalance({
     account: wallet.account,
     chainId,
-    rawAmount: parsedAmount.toExact(),
+    amount: parsedAmount.quotient.toString(),
   });
 
   if (isInsufficientRonBalance) {

@@ -8,23 +8,23 @@ import { getRoninReadProvider } from 'utils/provider';
 
 /**
  * Get permit allowance data of a token for a given owner and spender
+ * @param chainId Network chain ID
  * @param tokenAddress Token address
  * @param owner Owner address
- * @param chainId Network chain ID
  * @param spender Spender address (Optional - Default to universal router address)
  * @returns Permit allowance data of Token
  */
 const getPermitAllowance = async ({
+  chainId,
   tokenAddress,
   owner,
   spender,
-  chainId,
 }: GetPermitAllowanceArgs): Promise<{
   amount: BigNumber;
   expiration: number;
   nonce: number;
 }> => {
-  if (!checkAddress(owner) || !checkAddress(spender) || !checkAddress(tokenAddress)) {
+  if (!checkAddress(owner) || (spender && !checkAddress(spender)) || !checkAddress(tokenAddress)) {
     throw new Error('Invalid arguments');
   }
 

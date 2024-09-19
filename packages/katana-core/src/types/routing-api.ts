@@ -1,18 +1,16 @@
-import { ChainId, Currency, CurrencyAmount, Token, TradeType } from '@axieinfinity/sdk-core';
 import { MixedRouteSDK } from '@uniswap/router-sdk';
-import { Percent } from '@uniswap/sdk-core';
+import { Currency, CurrencyAmount, Percent, Token, TradeType } from '@uniswap/sdk-core';
 import { Route as V2Route } from '@uniswap/v2-sdk';
 import { Route as V3Route } from '@uniswap/v3-sdk';
-import { QuoteIntent, QuoteState } from 'functions/fetch-data/get-quote';
-
-import { KatanaTrade } from './katana-trade';
+import { ChainId } from 'configs/chain';
+import { QuoteIntent, SwapRouterNativeAssets } from 'constants/enum';
 
 type TradeTypeParam = 'exactIn' | 'exactOut';
 
 type GetQuoteArgs = {
   chainId: ChainId;
-  tokenInAddress: string;
-  tokenOutAddress: string;
+  tokenInAddress: string | SwapRouterNativeAssets;
+  tokenOutAddress: string | SwapRouterNativeAssets;
   tradeType: TradeType;
   amount: string;
   intent?: QuoteIntent;
@@ -129,16 +127,6 @@ type ClassicQuoteData = {
 
 type SwapFeeInfo = { recipient: string; percent: Percent; amount: string /* raw amount of output token */ };
 
-type TradeResult =
-  | {
-      state: QuoteState.NOT_FOUND;
-      trade?: undefined;
-    }
-  | {
-      state: QuoteState.SUCCESS;
-      trade: KatanaTrade;
-    };
-
 type RouteResult = {
   routev3: V3Route<Currency, Currency> | null;
   routev2: V2Route<Currency, Currency> | null;
@@ -154,7 +142,6 @@ export type {
   RouteResult,
   SwapFeeInfo,
   TokenInRoute,
-  TradeResult,
   V2PoolInRoute,
   V3PoolInRoute,
 };

@@ -4,9 +4,11 @@
 export type { Erc20 } from "./Erc20";
 export type { Multicall2 } from "./Multicall2";
 export type { Permit2 } from "./Permit2";
+export type { Pyth } from "./Pyth";
 export type { Wron } from "./Wron";
 export * as factories from "./factories";
 export { Erc20__factory } from "./factories/Erc20__factory";
 export { Multicall2__factory } from "./factories/Multicall2__factory";
 export { Permit2__factory } from "./factories/Permit2__factory";
+export { Pyth__factory } from "./factories/Pyth__factory";
 export { Wron__factory } from "./factories/Wron__factory";

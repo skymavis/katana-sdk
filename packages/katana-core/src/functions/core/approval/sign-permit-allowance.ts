@@ -6,33 +6,17 @@ import { signTypedData } from 'utils/sign-typed-data';
 /**
  * Sign the permit allowance
  * @param chainId Chain ID
- * @param permit Permit object
  * @param wallet Wallet object
+ * @param permit Permit object
  * @returns Permit object with signature
  */
 const signPermitAllowance = async ({ chainId, wallet, permit }: SignPermitAllowanceArgs): Promise<PermitSignature> => {
   try {
-    if (!wallet || !wallet.provider || !wallet.account) {
-      throw new Error('missing wallet');
-    }
     const signer = wallet.provider.getSigner();
-
-    if (!signer) {
-      throw new Error('missing signer');
-    }
-
-    if (!chainId) {
-      throw new Error('missing chainId');
-    }
-
     const signerChainId = await signer.getChainId();
 
     if (chainId !== signerChainId) {
       throw WrongChainError;
-    }
-
-    if (!permit) {
-      throw new Error('missing permit');
     }
 
     const { domain, types, values } = AllowanceTransfer.getPermitData(permit, PERMIT2_ADDRESS[chainId], chainId);

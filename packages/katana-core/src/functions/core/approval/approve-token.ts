@@ -1,4 +1,5 @@
 import { PERMIT2_ADDRESS } from '@axieinfinity/sdk-core';
+import { MaxUint256 } from '@uniswap/sdk-core';
 import { Erc20, Erc20__factory } from 'contracts';
 import { ContractTransaction } from 'ethers';
 import { ApproveTokenArgs } from 'types/approve-token';
@@ -7,25 +8,19 @@ import { didUserReject, UserRejectedRequestError } from 'utils/errors';
 
 /**
  * Approve token
- * @param amount - Amount to approve
- * @param tokenAddress - Token address
  * @param chainId - Chain ID
- * @param owner - Owner address
+ * @param tokenAddress - Token address
  * @param wallet - Wallet object
+ * @param amount - Amount to approve (Optional - Default to MaxUint256)
  * @param spender - Spender address (Optional - Default to permit2 address)
  */
 const approveToken = async ({
-  amount,
-  tokenAddress,
-  spender,
   chainId,
-  owner,
+  tokenAddress,
   wallet,
+  amount = MaxUint256.toString(),
+  spender,
 }: ApproveTokenArgs): Promise<ContractTransaction> => {
-  if (!amount || !tokenAddress || !chainId || !owner || !wallet || !wallet?.account || !wallet?.provider) {
-    throw new Error('Missing required parameters');
-  }
-
   const spenderAddress = spender || PERMIT2_ADDRESS[chainId];
 
   const contract = getContract({

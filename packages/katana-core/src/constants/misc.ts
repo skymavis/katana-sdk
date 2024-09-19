@@ -1,4 +1,4 @@
-import { Percent } from '@axieinfinity/sdk-core';
+import { Percent } from '@uniswap/sdk-core';
 
 const AVERAGE_RONIN_L1_BLOCK_TIME = 3000; // 3 seconds in milliseconds
 

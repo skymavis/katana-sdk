@@ -15,26 +15,18 @@ type GetTokenBalancesArgs = {
 
 /**
  * Get balance of tokens for a given account
- * @param account - Account address
  * @param chainId - Chain ID
+ * @param account - Account address
  * @param tokens - Array of token addresses
  * @returns Object with token addresses as keys and balances as values
  */
 const getTokenBalances = async ({
-  account,
   chainId,
+  account,
   tokens,
 }: GetTokenBalancesArgs): Promise<{ [tokenAddress: string]: BigNumber | null }> => {
-  if (!account) {
-    throw new Error('Account is required');
-  }
-
   if (!tokens || !tokens.length) {
     throw new Error('Tokens are required');
-  }
-
-  if (!chainId) {
-    throw new Error('Chain ID is required');
   }
 
   const validatedTokenAddresses = tokens.filter(t => checkAddress(t) !== false);
@@ -74,14 +66,7 @@ type GetRonBalanceArgs = {
  * @param chainId - Chain ID
  * @returns RON balance
  */
-const getRonBalance = async ({ chainId, account }: GetRonBalanceArgs) => {
-  if (!chainId) {
-    throw new Error('Chain ID is required');
-  }
-  if (!account) {
-    throw new Error('Account is required');
-  }
-
+const getRonBalance = async ({ chainId, account }: GetRonBalanceArgs): Promise<BigNumber> => {
   const multicallContract = getContract({
     address: MULTICALL2_ADDRESSES[chainId],
     ABI: Multicall2__factory.createInterface(),

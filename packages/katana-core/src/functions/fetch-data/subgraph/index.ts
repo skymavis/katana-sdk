@@ -1,1 +1,1 @@
-export * from './get-tokens';
+export * from './get-all-tokens';

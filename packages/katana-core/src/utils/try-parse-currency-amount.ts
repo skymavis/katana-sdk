@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount } from '@axieinfinity/sdk-core';
+import { Currency, CurrencyAmount } from '@uniswap/sdk-core';
 import { parseUnits } from 'ethers/lib/utils';
 import JSBI from 'jsbi';
 

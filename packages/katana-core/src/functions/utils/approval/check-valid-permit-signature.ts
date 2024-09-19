@@ -1,5 +1,6 @@
+import { UNIVERSAL_ROUTER_ADDRESS } from '@axieinfinity/sdk-core';
 import { AVERAGE_RONIN_L1_BLOCK_TIME } from 'constants/misc';
-import { CheckIsSignedPermitAllowanceArgs, CheckIsValidPermitAllowanceArgs } from 'types/permit';
+import { CheckIsValidPermitAllowanceArgs, CheckIsValidPermitAllowanceSignatureArgs } from 'types/permit';
 
 /**
  * Get the interval time to check if the permit signature is still valid
@@ -16,18 +17,20 @@ const getIntervalTimeCheckPermit = (blockTime = AVERAGE_RONIN_L1_BLOCK_TIME): nu
 
 /**
  * Check if the signature is valid for the permit allowance
+ * @param chainId Chain ID
  * @param token Token address
  * @param signature Signature
- * @param spender Spender address
  * @param now Current time in seconds (NOTE: Signature will expire, so it should be rechecked at an interval. Calculate now such that the signature will still be valid for the submitting block)
+ * @param spender Spender address (Optional - Default to universal router address)
  * @returns Boolean
  */
-const checkIsSignedPermitAllowance = ({
+const checkIsValidPermitAllowanceSignature = ({
+  chainId,
   token,
   signature,
-  spender,
   now,
-}: CheckIsSignedPermitAllowanceArgs): boolean => {
+  spender = UNIVERSAL_ROUTER_ADDRESS(chainId),
+}: CheckIsValidPermitAllowanceSignatureArgs): boolean => {
   if (!signature) {
     return false;
   }
@@ -38,21 +41,21 @@ const checkIsSignedPermitAllowance = ({
 /**
  * Check if the permit allowance is valid
  * @param permitAllowance Permit allowance data read from the contract
- * @param amount Amount to check
  * @param permitExpiration Permit expiration time
+ * @param amount Amount to check
  * @param now Current time in seconds (NOTE: PermitAllowance will expire, so it should be rechecked at an interval. Calculate now such that the signature will still be valid for the submitting block)
  * @returns Boolean
  */
 const checkIsValidPermitAllowance = ({
-  now,
   permitAllowance,
   permitExpiration,
   amount,
+  now,
 }: CheckIsValidPermitAllowanceArgs): boolean => {
-  if (!amount || !permitAllowance || !permitExpiration) {
+  if (!permitAllowance || !permitExpiration) {
     return false;
   }
   return permitAllowance.gte(amount) && permitExpiration >= now;
 };
 
-export { checkIsSignedPermitAllowance, checkIsValidPermitAllowance, getIntervalTimeCheckPermit };
+export { checkIsValidPermitAllowance, checkIsValidPermitAllowanceSignature, getIntervalTimeCheckPermit };

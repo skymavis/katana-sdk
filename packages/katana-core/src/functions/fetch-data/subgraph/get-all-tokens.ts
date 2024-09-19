@@ -1,4 +1,4 @@
-import { Token } from '@axieinfinity/sdk-core';
+import { Token } from '@uniswap/sdk-core';
 import { ChainId } from 'configs/chain';
 import { DEFAULT_ERC20_DECIMALS } from 'constants/tokens';
 import { getKatanaV2Graphql, KatanaV2Query } from 'services/graphql/subgraph-v2';
@@ -7,7 +7,7 @@ import { Token as TokenFromSubgraph } from 'types/subgraph';
 /**
  * Get all tokens from Katana V2 and V3 subgraph
  * @param chainId
- * @returns Object mapping token address to Token
+ * @returns Object mapping token address to Token interface (https://github.com/Uniswap/sdks/blob/main/sdks/sdk-core/src/entities/token.ts)
  */
 const getAllTokens = async (chainId: ChainId): Promise<{ [tokenAddress: string]: Token }> => {
   const [tokensV2, tokensV3] = await Promise.all([

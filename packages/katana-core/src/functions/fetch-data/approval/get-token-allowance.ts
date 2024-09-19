@@ -20,17 +20,17 @@ const getTokenAllowance = async ({
   spender,
   chainId,
 }: GetTokenAllowanceArgs): Promise<BigNumber> => {
-  if (!checkAddress(owner) || !checkAddress(spender) || !checkAddress(tokenAddress)) {
-    throw new Error('Invalid arguments');
+  if (!checkAddress(owner) || (spender && !checkAddress(spender)) || !checkAddress(tokenAddress)) {
+    throw new Error('Invalid address');
   }
 
   const spenderAddress = spender || PERMIT2_ADDRESS[chainId];
 
-  const contract = getContract({
+  const contract = getContract<Erc20>({
     address: tokenAddress,
     ABI: Erc20__factory.createInterface(),
     provider: getRoninReadProvider(chainId),
-  }) as Erc20;
+  });
 
   if (!contract) {
     throw new Error('Cannot get contract');

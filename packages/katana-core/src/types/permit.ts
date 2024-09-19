@@ -5,9 +5,10 @@ import { BigNumber } from 'ethers';
 import { WalletInfo } from './wallet';
 
 type CreatePermitArgs = {
+  chainId: ChainId;
   token: string;
-  spender: string;
   nonce: number;
+  spender?: string;
   amount?: BigNumber;
   expiration?: number;
   sigDeadline?: number;
@@ -34,23 +35,24 @@ type SignPermitAllowanceArgs = {
   chainId: ChainId;
 };
 
-type CheckIsSignedPermitAllowanceArgs = {
+type CheckIsValidPermitAllowanceSignatureArgs = {
+  chainId: ChainId;
   token: string;
-  signature: PermitSignature;
-  spender: string;
+  signature: PermitSignature | undefined;
   now: number;
+  spender?: string;
 };
 
 type CheckIsValidPermitAllowanceArgs = {
-  permitAllowance: BigNumber;
+  permitAllowance: BigNumber | undefined;
+  permitExpiration: number | undefined;
   amount: BigNumber;
-  permitExpiration: number;
   now: number;
 };
 
 export type {
-  CheckIsSignedPermitAllowanceArgs,
   CheckIsValidPermitAllowanceArgs,
+  CheckIsValidPermitAllowanceSignatureArgs,
   CreatePermitArgs,
   GetPermitAllowanceArgs,
   Permit,

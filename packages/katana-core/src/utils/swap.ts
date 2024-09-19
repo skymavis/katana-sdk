@@ -1,4 +1,4 @@
-import { TradeType } from '@axieinfinity/sdk-core';
+import { TradeType } from '@uniswap/sdk-core';
 import { FlatFeeOptions } from '@uniswap/universal-router-sdk';
 import { FeeOptions } from '@uniswap/v3-sdk';
 import { BigNumber } from 'ethers';

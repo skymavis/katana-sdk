@@ -1,4 +1,4 @@
-import { Currency, NativeCurrency, Token } from '@axieinfinity/sdk-core';
+import { Currency, NativeCurrency, Token } from '@uniswap/sdk-core';
 import { ChainId } from 'configs/chain';
 import invariant from 'tiny-invariant';
 

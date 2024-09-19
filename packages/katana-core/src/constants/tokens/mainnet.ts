@@ -1,4 +1,4 @@
-import { Token } from '@axieinfinity/sdk-core';
+import { Token } from '@uniswap/sdk-core';
 import { ChainId } from 'configs/chain';
 
 const WRON = new Token(ChainId.mainnet, '0xe514d9deb7966c8be0ca922de8a064264ea6bcd4', 18, 'WRON', 'Wrapped RON');

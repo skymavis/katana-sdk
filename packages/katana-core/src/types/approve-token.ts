@@ -15,9 +15,9 @@ type CheckIsTokenApprovedArgs = CommonApproveTokenArgs & {
 
 type GetTokenAllowanceArgs = CommonApproveTokenArgs;
 
-type ApproveTokenArgs = CommonApproveTokenArgs & {
-  amount: string;
+type ApproveTokenArgs = Omit<CommonApproveTokenArgs, 'owner'> & {
   wallet: WalletInfo;
+  amount?: string;
 };
 
 export type { ApproveTokenArgs, CheckIsTokenApprovedArgs, GetTokenAllowanceArgs };

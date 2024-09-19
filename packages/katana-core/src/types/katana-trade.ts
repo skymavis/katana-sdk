@@ -5,6 +5,30 @@ import { Route as V3Route } from '@uniswap/v3-sdk';
 
 import { SwapFeeInfo } from './routing-api';
 
+type KatanaTradeV2Route = {
+  routev2: V2Route<Currency, Currency>;
+  inputAmount: CurrencyAmount<Currency>;
+  outputAmount: CurrencyAmount<Currency>;
+};
+
+type KatanaTradeV3Route = {
+  routev3: V3Route<Currency, Currency>;
+  inputAmount: CurrencyAmount<Currency>;
+  outputAmount: CurrencyAmount<Currency>;
+};
+
+type KatanaTradeMixedRoute = {
+  mixedRoute: MixedRouteSDK<Currency, Currency>;
+  inputAmount: CurrencyAmount<Currency>;
+  outputAmount: CurrencyAmount<Currency>;
+};
+
+type KatanaTradeRoutes = {
+  v2Routes: KatanaTradeV2Route[];
+  v3Routes: KatanaTradeV3Route[];
+  mixedRoutes: KatanaTradeMixedRoute[];
+};
+
 class KatanaTrade extends Trade<Currency, Currency, TradeType> {
   blockNumber: string | null | undefined;
   requestId: string | undefined;
@@ -26,22 +50,10 @@ class KatanaTrade extends Trade<Currency, Currency, TradeType> {
     blockNumber?: string | null;
     requestId?: string;
     swapFee?: SwapFeeInfo;
-    v2Routes: {
-      routev2: V2Route<Currency, Currency>;
-      inputAmount: CurrencyAmount<Currency>;
-      outputAmount: CurrencyAmount<Currency>;
-    }[];
-    v3Routes: {
-      routev3: V3Route<Currency, Currency>;
-      inputAmount: CurrencyAmount<Currency>;
-      outputAmount: CurrencyAmount<Currency>;
-    }[];
+    v2Routes: KatanaTradeV2Route[];
+    v3Routes: KatanaTradeV3Route[];
+    mixedRoutes?: KatanaTradeMixedRoute[];
     tradeType: TradeType;
-    mixedRoutes?: {
-      mixedRoute: MixedRouteSDK<Currency, Currency>;
-      inputAmount: CurrencyAmount<Currency>;
-      outputAmount: CurrencyAmount<Currency>;
-    }[];
   }) {
     super(routes);
     this.blockNumber = blockNumber;
@@ -72,3 +84,4 @@ class KatanaTrade extends Trade<Currency, Currency, TradeType> {
 }
 
 export { KatanaTrade };
+export type { KatanaTradeRoutes };

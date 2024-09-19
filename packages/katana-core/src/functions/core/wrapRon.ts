@@ -9,30 +9,18 @@ import { getContract } from 'utils/contract';
 import tryParseCurrencyAmount from 'utils/try-parse-currency-amount';
 
 type WrapRonArgs = {
-  wallet: WalletInfo;
   chainId: ChainId;
+  wallet: WalletInfo;
   amount: string;
 };
 
 /**
  * Wrap RON to WRON
- * @param wallet - Wallet info
  * @param chainId - Chain id
+ * @param wallet - Wallet info
  * @param amount - Amount to wrap
  */
 const wrapRon = async ({ amount, chainId, wallet }: WrapRonArgs): Promise<ContractTransaction> => {
-  if (!wallet || !wallet?.account || !wallet?.provider) {
-    throw new Error('Wallet is required');
-  }
-
-  if (!amount) {
-    throw new Error('Amount is required');
-  }
-
-  if (!chainId) {
-    throw new Error('ChainId is required');
-  }
-
   const parsedAmount = tryParseCurrencyAmount(amount, RON.onChain(chainId));
 
   if (!parsedAmount) {
@@ -42,7 +30,7 @@ const wrapRon = async ({ amount, chainId, wallet }: WrapRonArgs): Promise<Contra
   const { isInsufficient: isInsufficientRonBalance, ronBalance } = await checkIsInsufficientRonBalance({
     account: wallet.account,
     chainId,
-    rawAmount: parsedAmount.toExact(),
+    amount: parsedAmount.quotient.toString(),
   });
 
   if (isInsufficientRonBalance) {

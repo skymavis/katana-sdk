@@ -1,4 +1,5 @@
-import { Percent, UNIVERSAL_ROUTER_ADDRESS } from '@axieinfinity/sdk-core';
+import { UNIVERSAL_ROUTER_ADDRESS } from '@axieinfinity/sdk-core';
+import { Percent } from '@uniswap/sdk-core';
 import { SwapRouter } from '@uniswap/universal-router-sdk';
 import { toHex } from '@uniswap/v3-sdk';
 import { ChainId } from 'configs/chain';
@@ -17,7 +18,7 @@ type SwapArgs = {
   chainId: ChainId;
   wallet: WalletInfo;
   trade: KatanaTrade;
-  permitSignature: PermitSignature;
+  permitSignature?: PermitSignature;
   slippageTolerance?: Percent;
   txDeadlineInSeconds?: number;
   onSubmitted?: (txHash: string) => void;
@@ -29,7 +30,7 @@ type SwapArgs = {
  * @param chainId - The chain ID
  * @param wallet - Object containing the account and provider
  * @param trade - The trade to execute
- * @param permitSignature - The permit signature of the input token
+ * @param permitSignature - The permit signature of the input token (Optional)
  * @param txDeadlineInSeconds - The transaction deadline in seconds (Optional, default: 30 minutes)
  * @param slippageTolerance - The slippage tolerance for the swap (Optional, default: 0.50%)
  * @param onSubmitted - Callback when the transaction is submitted (Optional)
@@ -37,27 +38,16 @@ type SwapArgs = {
  * @returns Transaction receipt
  */
 const swap = async ({
-  permitSignature,
-  trade,
-  slippageTolerance = DEFAULT_SWAP_SLIPPAGE,
-  txDeadlineInSeconds = DEFAULT_TX_DEADLINE,
   chainId,
   wallet: { account, provider },
+  trade,
+  permitSignature,
+  slippageTolerance = DEFAULT_SWAP_SLIPPAGE,
+  txDeadlineInSeconds = DEFAULT_TX_DEADLINE,
   onSubmitted,
   onSuccess,
 }: SwapArgs) => {
   try {
-    if (!permitSignature) {
-      throw new Error('Permit signature is required');
-    }
-    if (!trade) {
-      throw new Error('Trade is required');
-    }
-
-    if (!account || !provider) {
-      throw new Error('Wallet is required');
-    }
-
     const swapOptions = {
       slippageTolerance: slippageTolerance,
       inputTokenPermit: permitSignature,
