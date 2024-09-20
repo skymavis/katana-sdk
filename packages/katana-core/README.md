@@ -346,7 +346,7 @@ const tx = await unwrapRon(params);
 #### _Create wallet client_
 
 ```typescript
-import { ChainId } from '@sky-mavis/mavis-market-core';
+import { ChainId } from '@sky-mavis/katana-core';
 
 const createWalletClient = () => {
   const provider = new ethers.providers.Web3Provider(window.ronin.provider);
@@ -363,7 +363,7 @@ const createWalletClient = () => {
 ##### _Check is token approved_
 
 ```typescript
-import { ChainId, checkIsTokenApproved, DEFAULT_ERC20 } from '@sky-mavis/mavis-market-core';
+import { ChainId, checkIsTokenApproved, DEFAULT_ERC20 } from '@sky-mavis/katana-core';
 
 const { allowance, isApproved } = await checkIsTokenApproved({
     chainId,
@@ -376,7 +376,7 @@ const { allowance, isApproved } = await checkIsTokenApproved({
 ##### _Check is valid permit allowance signature_
 
 ```typescript
-import { ChainId, checkIsValidPermitAllowanceSignature, DEFAULT_ERC20 } from '@sky-mavis/mavis-market-core';
+import { ChainId, checkIsValidPermitAllowanceSignature, DEFAULT_ERC20 } from '@sky-mavis/katana-core';
 
 const currentTime = getIntervalTimeCheckPermit()
 const isValidSignature = checkIsValidPermitAllowanceSignature({
@@ -390,7 +390,7 @@ const isValidSignature = checkIsValidPermitAllowanceSignature({
 ##### _Check is valid permit allowance_
 
 ```typescript
-import { ChainId, checkIsValidPermitAllowance, DEFAULT_ERC20 } from '@sky-mavis/mavis-market-core';
+import { ChainId, checkIsValidPermitAllowance, DEFAULT_ERC20 } from '@sky-mavis/katana-core';
 
 const currentTime = getIntervalTimeCheckPermit()
 const { amount: permitAllowance, expiration: permitExpiration, nonce } = await getPermitAllowance({
@@ -410,7 +410,7 @@ const isValidPermitAllowance = checkIsValidPermitAllowance({
 ##### _Create permit object_
 
 ```typescript
-import { ChainId, createPermitObj, DEFAULT_ERC20 } from '@sky-mavis/mavis-market-core';
+import { ChainId, createPermitObj, DEFAULT_ERC20 } from '@sky-mavis/katana-core';
 
 const { nonce } = await getPermitAllowance({
     chainId: ChainId.mainnet,
