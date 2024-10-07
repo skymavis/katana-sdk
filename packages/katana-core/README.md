@@ -31,11 +31,11 @@ With npm
 ```typescript
 import { ChainId, getAllTokens, DEFAULT_ERC20 } from '@sky-mavis/katana-core';
 
-const allTokens: { [tokenAddress: string]: Token } = await getAllTokens(ChainId.mainnet);
+const allPublicTokens = await getAllTokens(ChainId.mainnet);
+const { mapTokens, arrTokens, arrTokenAddresses } = allPublicTokens
 
-const listTokensToShow = Object.values(allTokens);
 const tokenAddress = "0x97a9107c1793bc407d6f527b77e7fff4d812bece" // AXS
-const AXS_TOKEN = allTokens[tokenAddress]
+const AXS_TOKEN = mapTokens[tokenAddress]
 
 // or get token from list default erc20 (only for some popular erc20 tokens)
 const AXS_TOKEN = DEFAULT_ERC20[ChainId.mainnet].AXS
