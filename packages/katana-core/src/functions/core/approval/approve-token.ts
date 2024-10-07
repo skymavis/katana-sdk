@@ -4,7 +4,7 @@ import { Erc20, Erc20__factory } from 'contracts';
 import { ContractTransaction } from 'ethers';
 import { ApproveTokenArgs } from 'types/approve-token';
 import { getContract } from 'utils/contract';
-import { didUserReject, UserRejectedRequestError } from 'utils/errors';
+import { toReadableError } from 'utils/errors';
 
 /**
  * Approve token
@@ -38,11 +38,8 @@ const approveToken = async ({
     const response = await contract.approve(spenderAddress, amount);
     return response;
   } catch (error) {
-    if (didUserReject(error)) {
-      throw new UserRejectedRequestError(`Approve token failed: User rejected`);
-    } else {
-      throw error;
-    }
+    console.error(toReadableError(`Approve token failed:`, error));
+    throw error;
   }
 };
 

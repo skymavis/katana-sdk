@@ -5,7 +5,7 @@ import { didUserReject, getReasonFromError } from './errors';
  * This object seems to be undocumented by ethers.
  * @param error - An error from the ethers provider
  */
-function swapErrorToUserReadableMessage(error: any): string {
+const swapErrorToUserReadableMessage = (error: any): string => {
   if (didUserReject(error)) {
     return `Transaction rejected`;
   }
@@ -42,6 +42,6 @@ function swapErrorToUserReadableMessage(error: any): string {
         reason ? reason : 'Unknown error.'
       } You may need to increase your slippage tolerance. Note: fee-on-transfer and rebase tokens are incompatible with Uniswap V3.`;
   }
-}
+};
 
 export { swapErrorToUserReadableMessage };

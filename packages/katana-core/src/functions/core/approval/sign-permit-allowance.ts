@@ -1,6 +1,6 @@
 import { AllowanceTransfer, PERMIT2_ADDRESS } from '@uniswap/permit2-sdk';
 import { PermitSignature, SignPermitAllowanceArgs } from 'types/permit';
-import { didUserReject, toReadableError, UserRejectedRequestError, WrongChainError } from 'utils/errors';
+import { toReadableError, WrongChainError } from 'utils/errors';
 import { signTypedData } from 'utils/sign-typed-data';
 
 /**
@@ -21,22 +21,11 @@ const signPermitAllowance = async ({ chainId, wallet, permit }: SignPermitAllowa
 
     const { domain, types, values } = AllowanceTransfer.getPermitData(permit, PERMIT2_ADDRESS[chainId], chainId);
 
-    try {
-      const signature = await signTypedData(signer, domain, types, values);
-      return { ...permit, signature };
-    } catch (error) {
-      if (didUserReject(error)) {
-        throw new UserRejectedRequestError(`Token permit allowance failed: User rejected signature`);
-      } else {
-        throw error;
-      }
-    }
+    const signature = await signTypedData(signer, domain, types, values);
+    return { ...permit, signature };
   } catch (error: unknown) {
-    if (error instanceof UserRejectedRequestError) {
-      throw error;
-    } else {
-      throw toReadableError(`Token permit allowance failed:`, error);
-    }
+    console.error(toReadableError(`Token permit allowance failed:`, error));
+    throw error;
   }
 };
 

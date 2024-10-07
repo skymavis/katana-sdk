@@ -4,15 +4,13 @@ import { SwapRouter } from '@uniswap/universal-router-sdk';
 import { toHex } from '@uniswap/v3-sdk';
 import { ChainId } from 'configs/chain';
 import { DEFAULT_SWAP_SLIPPAGE, DEFAULT_TX_DEADLINE } from 'constants/misc';
-import { BigNumber } from 'ethers';
 import { KatanaTrade } from 'types/katana-trade';
 import { PermitSignature } from 'types/permit';
 import { WalletInfo } from 'types/wallet';
-import { didUserReject, GasEstimationError, UserRejectedRequestError } from 'utils/errors';
+import { toReadableError } from 'utils/errors';
 import { getDeadline } from 'utils/get-deadline';
 import isZero from 'utils/is-zero';
 import { calculateGasMargin, getUniversalRouterFeeFields } from 'utils/swap';
-import { swapErrorToUserReadableMessage } from 'utils/swap-error';
 
 type SwapArgs = {
   chainId: ChainId;
@@ -69,58 +67,23 @@ const swap = async ({
       ...(value && !isZero(value) ? { value: toHex(value) } : {}),
     };
 
-    let gasLimit: BigNumber;
-    try {
-      const gasEstimate = await provider.estimateGas(tx);
-      gasLimit = calculateGasMargin(gasEstimate);
-      tx.gasLimit = gasLimit;
-    } catch (gasError) {
-      console.error(gasError);
+    const gasEstimate = await provider.estimateGas(tx);
+    tx.gasLimit = calculateGasMargin(gasEstimate);
 
-      throw new GasEstimationError();
+    const response = await provider.getUncheckedSigner().sendTransaction({ ...tx });
+
+    onSubmitted && onSubmitted?.(response.hash);
+
+    const receipt = await response.wait();
+
+    if (receipt.status === 1) {
+      onSuccess && onSuccess?.(receipt);
     }
 
-    try {
-      const response = await provider.getUncheckedSigner().sendTransaction({ ...tx });
-
-      onSubmitted && onSubmitted?.(response.hash);
-
-      const receipt = await response.wait();
-
-      if (receipt.status === 1) {
-        onSuccess && onSuccess?.(receipt);
-        return receipt;
-      }
-
-      throw new Error('Transaction failed with status 0');
-    } catch (error) {
-      if (didUserReject(error)) {
-        throw new UserRejectedRequestError(swapErrorToUserReadableMessage(error));
-      } else {
-        throw error;
-      }
-    }
+    return receipt;
   } catch (error: any) {
-    let newError;
-
-    if (error instanceof GasEstimationError) {
-      newError = {
-        title: 'Estimate gas failed',
-        message: 'Your swap is expected to fail.',
-      };
-    } else if (error instanceof UserRejectedRequestError) {
-      newError = {
-        title: 'Swap failed',
-        message: 'Transaction rejected.',
-      };
-    } else {
-      newError = {
-        title: 'Swap failed',
-        message: swapErrorToUserReadableMessage(error),
-      };
-    }
-
-    throw newError;
+    console.error(toReadableError('Swap failed:', error));
+    throw error;
   }
 };
 

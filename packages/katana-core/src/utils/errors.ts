@@ -1,28 +1,6 @@
-class UserRejectedRequestError extends Error {
-  constructor(message: string) {
-    super(message);
-    this.name = 'UserRejectedRequestError';
-  }
-}
-
 class WrongChainError extends Error {
   constructor() {
     super('Wrong network');
-  }
-}
-
-class QueryFailError extends Error {
-  public constructor(message?: string) {
-    super();
-    this.name = 'QueryFailError';
-    this.message = message ?? 'Cannot query to Katana GraphQL';
-  }
-}
-
-/** Thrown when gas estimation fails. This class of error usually requires an emulator to determine the root cause. */
-class GasEstimationError extends Error {
-  constructor() {
-    super('Your swap is expected to fail.');
   }
 }
 
@@ -52,8 +30,7 @@ function didUserReject(error: any): boolean {
     // For Coinbase:
     reason?.match(/user denied/i) ||
     // For Fireblocks
-    reason?.match(/user rejected/i) ||
-    error instanceof UserRejectedRequestError
+    reason?.match(/user rejected/i)
   ) {
     return true;
   }
@@ -68,12 +45,4 @@ function toReadableError(errorText: string, error: unknown) {
   return new Error(`${errorText} 👺 ${error}`);
 }
 
-export {
-  didUserReject,
-  GasEstimationError,
-  getReasonFromError,
-  QueryFailError,
-  toReadableError,
-  UserRejectedRequestError,
-  WrongChainError,
-};
+export { didUserReject, getReasonFromError, toReadableError, WrongChainError };
