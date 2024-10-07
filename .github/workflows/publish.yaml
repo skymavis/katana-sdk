@@ -6,9 +6,8 @@ on:
 
 jobs:
   publish:
-    if: ${{ true == startsWith(github.event.release.tag_name, 'katana-core') }}
     runs-on: ubuntu-latest
-    environment: npm-production
+    environment: production
 
     steps:
       - uses: actions/checkout@v2
@@ -24,12 +23,13 @@ jobs:
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_PUBLISH_TOKEN }}" >> .npmrc
 
       - name: Install dependencies
-        run: cd packages/katana-core && yarn
+        run: yarn
 
       - name: Build
-        run: cd packages/katana-core && yarn build
+        run: yarn build
 
-      - name: Publish @sky-mavis/katana-sdk/katana-core
+      - name: Publish @sky-mavis/katana-core
         run: cd packages/katana-core && npm publish --access=public
+        if: ${{ true == startsWith(github.event.release.tag_name, 'katana-core') }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}

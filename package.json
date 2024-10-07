@@ -3,11 +3,11 @@
   "name": "katana-sdk",
 
   "scripts": {
-    "build": "turbo run build",
+    "build": "turbo run build --filter=!@katana-sdk/example",
     "dev": "turbo run dev --no-cache --parallel --continue",
     "lint": "turbo run lint",
-    "clean": "turbo run clean && rm -rf node_modules",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "clean": "turbo run clean && rm -rf node_modules"
   },
   "devDependencies": {
     "eslint": "8.57.0",
