@@ -23,6 +23,7 @@ const getAllTokens = async (
     const arrTokenAddresses: string[] = [];
 
     (data.data.results.data as IAllPublicTokens[])?.map(token => {
+      if (!token.is_active || !token.tag) return;
       mapTokens[token.token_address.toLowerCase()] = new Token(
         chainId,
         token.token_address,
