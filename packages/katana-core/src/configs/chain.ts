@@ -3,4 +3,6 @@ enum ChainId {
   testnet = 2021,
 }
 
-export { ChainId };
+const SUPPORTED_CHAINS = [ChainId.mainnet, ChainId.testnet] as const;
+
+export { ChainId, SUPPORTED_CHAINS };

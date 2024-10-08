@@ -19,6 +19,7 @@ const config = defineConfig({
       sourcemap: false,
     },
   ],
+  external: ['ethers', 'ethers/lib/utils', 'axios', '@uniswap/permit2-sdk', '@uniswap/universal-router-sdk'],
   plugins: [
     json(),
     typescript({

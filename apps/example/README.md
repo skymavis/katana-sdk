@@ -1,7 +1,7 @@
 # Example katana sdk
 (Deploy url: tbd)
 
-This is an example katana dex which uses [katana core](https://github.com/skymavis/katana-sdk/tree/main/packages/katana-core)
+This is an example katana dex which uses [katana core](https://github.com/skymavis/katana-sdk/tree/main/packages/katana-swap)
 
 ## Features
 

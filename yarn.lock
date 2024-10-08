@@ -15,21 +15,6 @@
     "@jridgewell/gen-mapping" "^0.3.5"
     "@jridgewell/trace-mapping" "^0.3.24"
 
-"@axieinfinity/sdk-core@0.0.9":
-  version "0.0.9"
-  resolved "https://npm.pkg.github.com/download/@axieinfinity/sdk-core/0.0.9/89470e0c015a48433bd232270bb5f6a1de8cd11d#89470e0c015a48433bd232270bb5f6a1de8cd11d"
-  integrity sha512-wZsuoawe+Cw90VR4WwgjUXezqDZ90/BAdYKQovFEGIV3z1Z7Ec4RTiRWLz+SwP80UxSzJDHo60KQYEFUUWUSzA==
-  dependencies:
-    "@ethersproject/address" "^5.0.2"
-    "@ethersproject/bytes" "^5.7.0"
-    "@ethersproject/keccak256" "5.7.0"
-    "@ethersproject/strings" "5.7.0"
-    big.js "^5.2.2"
-    decimal.js-light "^2.5.0"
-    jsbi "^3.1.4"
-    tiny-invariant "^1.1.0"
-    toformat "^2.0.0"
-
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.23.5", "@babel/code-frame@^7.24.7":
   version "7.24.7"
   resolved "https://registry.npmjs.org/@babel/code-frame/-/code-frame-7.24.7.tgz"
@@ -3387,6 +3372,21 @@
     "@uniswap/v2-sdk" "^4.3.2"
     "@uniswap/v3-sdk" "^3.11.2"
     "@uniswap/v4-sdk" "^1.0.0"
+
+"@uniswap/sdk-core@5.3.0":
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/@uniswap/sdk-core/-/sdk-core-5.3.0.tgz#4af6d7d794ce65c5303b2d4c58c87a917bbeb986"
+  integrity sha512-wbMzSY3wbByOkoirZXyeomof4a7goueT4bOa4YqoXDWqIftqrT70UuCgjk98nIBu3UqPxRNMptXusppxZVvwWA==
+  dependencies:
+    "@ethersproject/address" "^5.0.2"
+    "@ethersproject/bytes" "^5.7.0"
+    "@ethersproject/keccak256" "5.7.0"
+    "@ethersproject/strings" "5.7.0"
+    big.js "^5.2.2"
+    decimal.js-light "^2.5.0"
+    jsbi "^3.1.4"
+    tiny-invariant "^1.1.0"
+    toformat "^2.0.0"
 
 "@uniswap/sdk-core@^5.0.0", "@uniswap/sdk-core@^5.3.0", "@uniswap/sdk-core@^5.3.1":
   version "5.4.0"
@@ -8423,6 +8423,11 @@ thread-stream@^0.15.1:
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
   integrity sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==
 
+tiny-invariant@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/tiny-invariant/-/tiny-invariant-1.1.0.tgz#634c5f8efdc27714b7f386c35e6760991d230875"
+  integrity sha512-ytxQvrb1cPc9WBEI/HSeYYoGD0kWnGEOR8RY6KomWLBVhqz0RgTwVO9dLrGz7dC+nN9llyI7OKAgRq8Vq4ZBSw==
+
 tiny-invariant@^1.1.0:
   version "1.3.3"
   resolved "https://registry.npmjs.org/tiny-invariant/-/tiny-invariant-1.3.3.tgz"
@@ -8635,6 +8640,11 @@ typescript@5.4.5:
   version "5.4.5"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.4.5.tgz#42ccef2c571fdbd0f6718b1d1f5e6e5ef006f611"
   integrity sha512-vcI4UpRgg81oIRUFwR0WSIHKt11nJ7SAVlYNIu+QpqeyXP+gpQJy/Z4+F0aGxSE4MqwjyXvW/TzgkLAx2AGHwQ==
+
+typescript@5.6.2:
+  version "5.6.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.6.2.tgz#d1de67b6bef77c41823f822df8f0b3bcff60a5a0"
+  integrity sha512-NW8ByodCSNCwZeghjN3o+JX5OFH0Ojg6sadjEKY4huZ52TqbJTJnDo5+Tw98lSy63NZvi4n+ez5m2u5d4PkZyw==
 
 typical@^4.0.0:
   version "4.0.0"
