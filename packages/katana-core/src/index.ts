@@ -1,3 +1,3 @@
-export * from './addresses';
-export * from './configs/chain';
+export * from './configs';
 export * from './entities';
+export * from './utils';
