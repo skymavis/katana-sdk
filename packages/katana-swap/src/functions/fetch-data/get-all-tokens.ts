@@ -1,6 +1,6 @@
+import { ChainId } from '@sky-mavis/katana-core';
 import { Token } from '@uniswap/sdk-core';
 import axios from 'axios';
-import { ChainId } from '@sky-mavis/katana-core';
 import { DAPP_OFFCHAIN_URL } from 'constants/url';
 import { IAllPublicTokens } from 'types/token';
 import { toReadableError } from 'utils/errors';
@@ -23,7 +23,8 @@ const getAllTokens = async (
     const arrTokenAddresses: string[] = [];
 
     (data.data.results.data as IAllPublicTokens[])?.map(token => {
-      if (!token.is_active || !token.tag) return;
+      if (!token?.is_active || !token?.token_address || !token?.token_decimals || !token?.tag) return;
+
       mapTokens[token.token_address.toLowerCase()] = new Token(
         chainId,
         token.token_address,

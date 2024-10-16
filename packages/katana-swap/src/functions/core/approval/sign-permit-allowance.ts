@@ -1,4 +1,5 @@
-import { AllowanceTransfer, PERMIT2_ADDRESS } from '@uniswap/permit2-sdk';
+import { PERMIT2_ADDRESS } from '@sky-mavis/katana-core';
+import { AllowanceTransfer } from '@uniswap/permit2-sdk';
 import { PermitSignature, SignPermitAllowanceArgs } from 'types/permit';
 import { toReadableError, WrongChainError } from 'utils/errors';
 import { signTypedData } from 'utils/sign-typed-data';

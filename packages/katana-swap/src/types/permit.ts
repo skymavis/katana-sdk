@@ -1,5 +1,5 @@
-import { PermitSingle } from '@uniswap/permit2-sdk';
 import { ChainId } from '@sky-mavis/katana-core';
+import { PermitSingle } from '@uniswap/permit2-sdk';
 import { BigNumber } from 'ethers';
 
 import { WalletInfo } from './wallet';

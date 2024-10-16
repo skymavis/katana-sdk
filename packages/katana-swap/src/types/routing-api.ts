@@ -1,8 +1,8 @@
+import { ChainId } from '@sky-mavis/katana-core';
 import { MixedRouteSDK } from '@uniswap/router-sdk';
 import { Currency, CurrencyAmount, Percent, Token, TradeType } from '@uniswap/sdk-core';
 import { Route as V2Route } from '@uniswap/v2-sdk';
 import { Route as V3Route } from '@uniswap/v3-sdk';
-import { ChainId } from '@sky-mavis/katana-core';
 import { QuoteIntent, SwapRouterNativeAssets } from 'constants/enum';
 
 type TradeTypeParam = 'exactIn' | 'exactOut';
