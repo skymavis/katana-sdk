@@ -1,28 +1,38 @@
-import { ChainId, SUPPORTED_CHAINS } from 'configs/chain';
+import { ChainId, SUPPORTED_CHAINS } from './chain';
 
-type AddressMap = { [chainId: number]: string };
+export type IAddressMap = { [chainId: number]: string };
 
 type ChainAddresses = {
   v3CoreFactoryAddress: string;
   multicallAddress: string;
   quoterAddress: string;
-  v3MigratorAddress?: string;
-  nonfungiblePositionManagerAddress?: string;
-  tickLensAddress?: string;
+  v3MigratorAddress: string;
+  nonfungiblePositionManagerAddress: string;
+  tickLensAddress: string;
   swapRouter02Address?: string;
-  mixedRouteQuoterV1Address?: string;
-  universalRouterAddress?: string;
-  permit2Address?: string;
+  mixedRouteQuoterV1Address: string;
+  universalRouterAddress: string;
+  permit2Address: string;
 };
 
-export const V2_FACTORY_ADDRESSES: AddressMap = {
-  [ChainId.mainnet]: '', // tbd
-  [ChainId.testnet]: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f',
+export const V2_FACTORY_ADDRESSES: IAddressMap = {
+  [ChainId.mainnet]: '0xb255d6a720bb7c39fee173ce22113397119cb930',
+  [ChainId.testnet]: '0x86587380c4c815ba0066c90adb2b45cc9c15e72c',
 };
 
-export const V2_ROUTER_ADDRESSES: AddressMap = {
-  [ChainId.mainnet]: '', // tbd
-  [ChainId.testnet]: '0x5e0549354606efc1de33ea618d2183d81c62c193',
+export const PERMISSIONED_ROUTER_ADDRESS: IAddressMap = {
+  [ChainId.mainnet]: '0xc05afc8c9353c1dd5f872eccfacd60fd5a2a9ac7',
+  [ChainId.testnet]: '0x3BD36748D17e322cFB63417B059Bcc1059012D83',
+};
+
+export const AFFILIATE_ROUTER_ADDRESS: IAddressMap = {
+  [ChainId.mainnet]: '0x77f96cf7b98b963fb8a9b84787806d396d953b2b',
+  [ChainId.testnet]: '0x4a913d50e618ee9f61ffa288d8f8040d489d2360',
+};
+
+export const KATANA_GOVERNANCE_ADDRESSES: IAddressMap = {
+  [ChainId.mainnet]: '0x2c1726346d83cbf848bd3c2b208ec70d32a9e44a',
+  [ChainId.testnet]: '0x247f12836a421cdc5e22b93bf5a9aaa0f521f986',
 };
 
 // tdb
@@ -58,15 +68,15 @@ export const CHAIN_TO_ADDRESSES_MAP: Record<ChainId, ChainAddresses> = {
 };
 
 /* V3 Contract Addresses */
-export const V3_CORE_FACTORY_ADDRESSES: AddressMap = {
-  ...SUPPORTED_CHAINS.reduce<AddressMap>((memo, chainId) => {
+export const V3_CORE_FACTORY_ADDRESSES: IAddressMap = {
+  ...SUPPORTED_CHAINS.reduce<IAddressMap>((memo, chainId) => {
     memo[chainId] = CHAIN_TO_ADDRESSES_MAP[chainId].v3CoreFactoryAddress;
     return memo;
   }, {}),
 };
 
-export const V3_MIGRATOR_ADDRESSES: AddressMap = {
-  ...SUPPORTED_CHAINS.reduce<AddressMap>((memo, chainId) => {
+export const V3_MIGRATOR_ADDRESSES: IAddressMap = {
+  ...SUPPORTED_CHAINS.reduce<IAddressMap>((memo, chainId) => {
     const v3MigratorAddress = CHAIN_TO_ADDRESSES_MAP[chainId].v3MigratorAddress;
     if (v3MigratorAddress) {
       memo[chainId] = v3MigratorAddress;
@@ -75,22 +85,22 @@ export const V3_MIGRATOR_ADDRESSES: AddressMap = {
   }, {}),
 };
 
-export const MULTICALL_ADDRESSES: AddressMap = {
-  ...SUPPORTED_CHAINS.reduce<AddressMap>((memo, chainId) => {
+export const MULTICALL_ADDRESSES: IAddressMap = {
+  ...SUPPORTED_CHAINS.reduce<IAddressMap>((memo, chainId) => {
     memo[chainId] = CHAIN_TO_ADDRESSES_MAP[chainId].multicallAddress;
     return memo;
   }, {}),
 };
 
-export const QUOTER_ADDRESSES: AddressMap = {
-  ...SUPPORTED_CHAINS.reduce<AddressMap>((memo, chainId) => {
+export const QUOTER_ADDRESSES: IAddressMap = {
+  ...SUPPORTED_CHAINS.reduce<IAddressMap>((memo, chainId) => {
     memo[chainId] = CHAIN_TO_ADDRESSES_MAP[chainId].quoterAddress;
     return memo;
   }, {}),
 };
 
-export const NONFUNGIBLE_POSITION_MANAGER_ADDRESSES: AddressMap = {
-  ...SUPPORTED_CHAINS.reduce<AddressMap>((memo, chainId) => {
+export const NONFUNGIBLE_POSITION_MANAGER_ADDRESSES: IAddressMap = {
+  ...SUPPORTED_CHAINS.reduce<IAddressMap>((memo, chainId) => {
     const nonfungiblePositionManagerAddress = CHAIN_TO_ADDRESSES_MAP[chainId].nonfungiblePositionManagerAddress;
     if (nonfungiblePositionManagerAddress) {
       memo[chainId] = nonfungiblePositionManagerAddress;
@@ -99,8 +109,8 @@ export const NONFUNGIBLE_POSITION_MANAGER_ADDRESSES: AddressMap = {
   }, {}),
 };
 
-export const TICK_LENS_ADDRESSES: AddressMap = {
-  ...SUPPORTED_CHAINS.reduce<AddressMap>((memo, chainId) => {
+export const TICK_LENS_ADDRESSES: IAddressMap = {
+  ...SUPPORTED_CHAINS.reduce<IAddressMap>((memo, chainId) => {
     const tickLensAddress = CHAIN_TO_ADDRESSES_MAP[chainId].tickLensAddress;
     if (tickLensAddress) {
       memo[chainId] = tickLensAddress;
@@ -109,7 +119,7 @@ export const TICK_LENS_ADDRESSES: AddressMap = {
   }, {}),
 };
 
-export const MIXED_ROUTE_QUOTER_V1_ADDRESSES: AddressMap = SUPPORTED_CHAINS.reduce<AddressMap>((memo, chainId) => {
+export const MIXED_ROUTE_QUOTER_V1_ADDRESSES: IAddressMap = SUPPORTED_CHAINS.reduce<IAddressMap>((memo, chainId) => {
   const mixedRouteQuoterV1Address = CHAIN_TO_ADDRESSES_MAP[chainId].mixedRouteQuoterV1Address;
   if (mixedRouteQuoterV1Address) {
     memo[chainId] = mixedRouteQuoterV1Address;
@@ -125,7 +135,7 @@ export const SWAP_ROUTER_02_ADDRESSES = (chainId: number) => {
   return '';
 };
 
-export const UNIVERSAL_ROUTER_ADDRESS: AddressMap = SUPPORTED_CHAINS.reduce<AddressMap>((memo, chainId) => {
+export const UNIVERSAL_ROUTER_ADDRESS: IAddressMap = SUPPORTED_CHAINS.reduce<IAddressMap>((memo, chainId) => {
   const universalRouterAddress = CHAIN_TO_ADDRESSES_MAP[chainId].universalRouterAddress;
   if (universalRouterAddress) {
     memo[chainId] = universalRouterAddress;
@@ -133,7 +143,7 @@ export const UNIVERSAL_ROUTER_ADDRESS: AddressMap = SUPPORTED_CHAINS.reduce<Addr
   return memo;
 }, {});
 
-export const PERMIT2_ADDRESS: AddressMap = SUPPORTED_CHAINS.reduce<AddressMap>((memo, chainId) => {
+export const PERMIT2_ADDRESS: IAddressMap = SUPPORTED_CHAINS.reduce<IAddressMap>((memo, chainId) => {
   const permit2Address = CHAIN_TO_ADDRESSES_MAP[chainId].permit2Address;
   if (permit2Address) {
     memo[chainId] = permit2Address;
