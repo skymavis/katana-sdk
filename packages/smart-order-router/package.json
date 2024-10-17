@@ -2,7 +2,7 @@
   "name": "@sky-mavis/smart-order-router",
   "description": "Ronin Swap Smart Order Router",
   "version": "0.0.1-alpha",
-  "license": "MIT",
+  "license": "GPL",
   "publishConfig": {
     "access": "public"
   },
