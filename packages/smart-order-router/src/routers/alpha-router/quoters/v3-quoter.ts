@@ -120,11 +120,6 @@ export class V3Quoter extends BaseQuoter<V3CandidatePools, V3Route> {
 
     const beforeQuotes = Date.now();
     log.info(`Getting quotes for V3 for ${routes.length} routes with ${amounts.length} amounts per route.`);
-    console.debug('quoteFn', {
-      amounts,
-      routes,
-      routingConfig,
-    });
     const { routesWithQuotes } = await quoteFn<V3Route>(amounts, routes, routingConfig);
 
     metric.putMetric('V3QuotesLoad', Date.now() - beforeQuotes, MetricLoggerUnit.Milliseconds);
@@ -138,7 +133,6 @@ export class V3Quoter extends BaseQuoter<V3CandidatePools, V3Route> {
     );
 
     const routesWithValidQuotes = [];
-    console.debug('routesWithQuotes', routesWithQuotes);
     for (const routeWithQuote of routesWithQuotes) {
       const [route, quotes] = routeWithQuote;
 
@@ -171,7 +165,6 @@ export class V3Quoter extends BaseQuoter<V3CandidatePools, V3Route> {
           tradeType,
           v3PoolProvider: this.v3PoolProvider,
         });
-        console.debug('routeWithValidQuote', i, routeWithValidQuote);
         routesWithValidQuotes.push(routeWithValidQuote);
       }
     }

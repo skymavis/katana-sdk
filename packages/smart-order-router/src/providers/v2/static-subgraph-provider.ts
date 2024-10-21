@@ -4,8 +4,8 @@ import _ from 'lodash';
 
 import { WRAPPED_NATIVE_CURRENCY } from '../../util/chains';
 import { log } from '../../util/log';
-import { USDC_RONIN_MAINNET, USDC_RONIN_TESTNET } from '../token-provider';
 import { IV2SubgraphProvider, V2SubgraphPool } from './subgraph-provider';
+import { USDC_RONIN_MAINNET, USDC_RONIN_TESTNET } from '../../routers/alpha-router/gas-models/gas-model';
 
 type ChainTokenList = {
   readonly [chainId in ChainId]: Token[];

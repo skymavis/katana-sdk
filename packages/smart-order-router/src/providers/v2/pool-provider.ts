@@ -119,7 +119,6 @@ export class V2PoolProvider implements IV2PoolProvider {
     const poolAddressToPool: { [poolAddress: string]: Pair } = {};
 
     const invalidPools: [Token, Token][] = [];
-    console.debug('sortedPoolAddresses - reservesResults', sortedPoolAddresses, reservesResults);
     for (let i = 0; i < sortedPoolAddresses.length; i++) {
       const reservesResult = reservesResults[i]!;
 

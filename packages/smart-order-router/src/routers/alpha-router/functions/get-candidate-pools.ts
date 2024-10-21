@@ -4,14 +4,7 @@ import { Token, TradeType } from '@uniswap/sdk-core';
 import { FeeAmount } from '@uniswap/v3-sdk';
 import _ from 'lodash';
 
-import {
-  ITokenListProvider,
-  ITokenProvider,
-  IV2SubgraphProvider,
-  USDC_RONIN_MAINNET,
-  USDC_RONIN_TESTNET,
-  V2SubgraphPool,
-} from '../../../providers';
+import { ITokenListProvider, ITokenProvider, IV2SubgraphProvider, V2SubgraphPool } from '../../../providers';
 import { IV2PoolProvider, V2PoolAccessor } from '../../../providers/v2/pool-provider';
 import { IV3PoolProvider, V3PoolAccessor } from '../../../providers/v3/pool-provider';
 import { IV3SubgraphProvider, V3SubgraphPool } from '../../../providers/v3/subgraph-provider';
@@ -20,6 +13,7 @@ import { parseFeeAmount } from '../../../util/amounts';
 import { log } from '../../../util/log';
 import { metric, MetricLoggerUnit } from '../../../util/metric';
 import { AlphaRouterConfig } from '../alpha-router';
+import { USDC_RONIN_MAINNET, USDC_RONIN_TESTNET } from '../gas-models';
 
 export type PoolId = { id: string };
 export type CandidatePoolsBySelectionCriteria = {
@@ -488,7 +482,6 @@ export async function getV2CandidatePools({
   const allPoolsRaw = await subgraphProvider.getPools(tokenIn, tokenOut, {
     blockNumber,
   });
-  console.debug('allPoolsRaw', allPoolsRaw);
   // With tens of thousands of V2 pools, operations that copy pools become costly.
   // Mutate the pool directly rather than creating a new pool / token to optimmize for speed.
   for (const pool of allPoolsRaw) {
@@ -571,7 +564,6 @@ export async function getV2CandidatePools({
 
   // Used to track how many iterations we do in the first loop
   let loopsInFirstIteration = 0;
-  console.debug('subgraphPoolsSorted', subgraphPoolsSorted);
   // Filtering step for up to first hop
   // The pools are pre-sorted, so we can just iterate through them and fill our heuristics.
   for (const subgraphPool of subgraphPoolsSorted) {
@@ -874,7 +866,6 @@ export async function getV2CandidatePools({
   ])
     .uniqBy(pool => pool.id)
     .value();
-  console.debug('subgraphPools', subgraphPools);
   const tokenAddressesSet: Set<string> = new Set();
   for (const pool of subgraphPools) {
     tokenAddressesSet.add(pool.token0.id);
@@ -930,9 +921,7 @@ export async function getV2CandidatePools({
 
   // this should be the only place to enable fee-on-transfer fee fetching,
   // because this places loads pools (pairs of tokens with fot taxes) from the subgraph
-  console.debug('poolAccessor - 1', tokenPairs, routingConfig);
   const poolAccessor = await poolProvider.getPools(tokenPairs, routingConfig);
-  console.debug('poolAccessor - 2', poolAccessor);
   metric.putMetric('V2PoolsLoad', Date.now() - beforePoolsLoad, MetricLoggerUnit.Milliseconds);
 
   const poolsBySelection: CandidatePoolsBySelectionCriteria = {

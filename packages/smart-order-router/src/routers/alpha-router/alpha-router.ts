@@ -937,20 +937,6 @@ export class AlphaRouter implements IRouter<AlphaRouterConfig>, ISwapToRatio<Alp
         swapConfig,
       );
     }
-    console.debug({
-      amount,
-      tokenIn,
-      tokenOut,
-      protocols,
-      quoteToken,
-      tradeType,
-      routingConfig,
-      v3GasModel,
-      mixedRouteGasModel,
-      gasPriceWei,
-      v2GasModel,
-      swapConfig,
-    });
     let swapRouteFromChainPromise: Promise<BestSwapRoute | null> = Promise.resolve(null);
     if (!cachedRoutes || cacheMode !== CacheMode.Livemode) {
       swapRouteFromChainPromise = this.getSwapRouteFromChain(
@@ -973,7 +959,6 @@ export class AlphaRouter implements IRouter<AlphaRouterConfig>, ISwapToRatio<Alp
       swapRouteFromCachePromise,
       swapRouteFromChainPromise,
     ]);
-    console.debug([swapRouteFromCache, swapRouteFromChain]);
     let swapRouteRaw: BestSwapRoute | null;
     let hitsCachedRoute = false;
     if (cacheMode === CacheMode.Livemode && swapRouteFromCache) {
@@ -984,7 +969,6 @@ export class AlphaRouter implements IRouter<AlphaRouterConfig>, ISwapToRatio<Alp
       log.info(`CacheMode is ${cacheMode}, and we are using materialized swapRoute`);
       swapRouteRaw = swapRouteFromChain;
     }
-    console.debug('swapRouteRaw', swapRouteRaw);
     if (cacheMode === CacheMode.Tapcompare && swapRouteFromCache && swapRouteFromChain) {
       const quoteDiff = swapRouteFromChain.quote.subtract(swapRouteFromCache.quote);
       const quoteGasAdjustedDiff = swapRouteFromChain.quoteGasAdjusted.subtract(swapRouteFromCache.quoteGasAdjusted);
@@ -1089,7 +1073,6 @@ export class AlphaRouter implements IRouter<AlphaRouterConfig>, ISwapToRatio<Alp
 
     // Build Trade object that represents the optimal swap.
     const trade = buildTrade<typeof tradeType>(currencyIn, currencyOut, tradeType, routeAmounts);
-    console.debug('trade', trade);
     let methodParameters: MethodParameters | undefined;
 
     // If user provided recipient, deadline etc. we also generate the calldata required to execute
@@ -1097,8 +1080,6 @@ export class AlphaRouter implements IRouter<AlphaRouterConfig>, ISwapToRatio<Alp
     if (swapConfig) {
       methodParameters = buildSwapMethodParameters(trade, swapConfig, this.chainId);
     }
-
-    console.debug('methodParameters', methodParameters);
 
     const tokenOutAmount =
       tradeType === TradeType.EXACT_OUTPUT
@@ -1205,7 +1186,6 @@ export class AlphaRouter implements IRouter<AlphaRouterConfig>, ISwapToRatio<Alp
       // In this case this means that there's no route, so we return null
       return Promise.resolve(null);
     }
-    console.debug('[percents, amounts]', [percents, amounts]);
     if (v3Routes.length > 0) {
       const v3RoutesFromCache: V3Route[] = v3Routes.map(cachedRoute => cachedRoute.route as V3Route);
       metric.putMetric('SwapRouteFromCache_V3_GetQuotes_Request', 1, MetricLoggerUnit.Count);
@@ -1230,7 +1210,6 @@ export class AlphaRouter implements IRouter<AlphaRouterConfig>, ISwapToRatio<Alp
     if (v2Routes.length > 0) {
       const v2RoutesFromCache: V2Route[] = v2Routes.map(cachedRoute => cachedRoute.route as V2Route);
       metric.putMetric('SwapRouteFromCache_V2_GetQuotes_Request', 1, MetricLoggerUnit.Count);
-      console.debug('v2Routes', v2Routes);
       const beforeGetQuotes = Date.now();
 
       quotePromises.push(
@@ -1321,7 +1300,6 @@ export class AlphaRouter implements IRouter<AlphaRouterConfig>, ISwapToRatio<Alp
     // We will get quotes for fractions of the input amount for different routes, then
     // combine to generate split routes.
     const [percents, amounts] = this.getAmountDistribution(amount, routingConfig);
-    console.debug('[percents, amounts]', [percents, amounts]);
     const noProtocolsSpecified = protocols.length === 0;
     const v3ProtocolSpecified = protocols.includes(Protocol.V3);
     const v2ProtocolSpecified = protocols.includes(Protocol.V2);
@@ -1344,7 +1322,6 @@ export class AlphaRouter implements IRouter<AlphaRouterConfig>, ISwapToRatio<Alp
         routingConfig,
         chainId: this.chainId,
       }).then(candidatePools => {
-        console.debug('v3', { candidatePools });
         metric.putMetric('GetV3CandidatePools', Date.now() - beforeGetCandidates, MetricLoggerUnit.Milliseconds);
         return candidatePools;
       });
@@ -1369,7 +1346,6 @@ export class AlphaRouter implements IRouter<AlphaRouterConfig>, ISwapToRatio<Alp
         routingConfig,
         chainId: this.chainId,
       }).then(candidatePools => {
-        console.debug('v2', { candidatePools });
         metric.putMetric('GetV2CandidatePools', Date.now() - beforeGetCandidates, MetricLoggerUnit.Milliseconds);
         return candidatePools;
       });
@@ -1379,7 +1355,6 @@ export class AlphaRouter implements IRouter<AlphaRouterConfig>, ISwapToRatio<Alp
 
     // Maybe Quote V3 - if V3 is specified, or no protocol is specified
     if (v3ProtocolSpecified || noProtocolsSpecified) {
-      console.debug('Routing across V3', this.v3Quoter);
       log.info({ protocols, tradeType }, 'Routing across V3');
 
       metric.putMetric('SwapRouteFromChain_V3_GetRoutesThenQuotes_Request', 1, MetricLoggerUnit.Count);
@@ -1415,7 +1390,6 @@ export class AlphaRouter implements IRouter<AlphaRouterConfig>, ISwapToRatio<Alp
 
     // Maybe Quote V2 - if V2 is specified, or no protocol is specified AND v2 is supported in this chain
     if (v2SupportedInChain && (v2ProtocolSpecified || noProtocolsSpecified)) {
-      console.debug('Routing across V2');
       log.info({ protocols, tradeType }, 'Routing across V2');
 
       metric.putMetric('SwapRouteFromChain_V2_GetRoutesThenQuotes_Request', 1, MetricLoggerUnit.Count);
@@ -1454,7 +1428,6 @@ export class AlphaRouter implements IRouter<AlphaRouterConfig>, ISwapToRatio<Alp
     // if MixedProtocol is specified or no protocol is specified and v2 is supported AND tradeType is ExactIn
     // AND is Mainnet or Gorli
     if (shouldQueryMixedProtocol && mixedProtocolAllowed) {
-      console.debug('Routing across MixedRoutes');
       log.info({ protocols, tradeType }, 'Routing across MixedRoutes');
 
       metric.putMetric('SwapRouteFromChain_Mixed_GetRoutesThenQuotes_Request', 1, MetricLoggerUnit.Count);
@@ -1489,7 +1462,6 @@ export class AlphaRouter implements IRouter<AlphaRouterConfig>, ISwapToRatio<Alp
     }
 
     const getQuotesResults = await Promise.all(quotePromises);
-    console.debug('getQuotesResults', getQuotesResults);
     const allRoutesWithValidQuotes: RouteWithValidQuote[] = [];
     const allCandidatePools: CandidatePoolsBySelectionCriteria[] = [];
     getQuotesResults.forEach(getQuoteResult => {
@@ -1515,7 +1487,6 @@ export class AlphaRouter implements IRouter<AlphaRouterConfig>, ISwapToRatio<Alp
       this.portionProvider,
       swapConfig,
     );
-    console.debug('bestSwapRoute', bestSwapRoute);
 
     if (bestSwapRoute) {
       this.emitPoolSelectionMetrics(bestSwapRoute, allCandidatePools);

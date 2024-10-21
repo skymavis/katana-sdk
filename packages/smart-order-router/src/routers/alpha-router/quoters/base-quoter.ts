@@ -125,7 +125,6 @@ export abstract class BaseQuoter<
     gasPriceWei?: BigNumber,
   ): Promise<GetQuotesResult> {
     return this.getRoutes(tokenIn, tokenOut, candidatePools, tradeType, routingConfig).then(routesResult => {
-      console.debug('getRoutesThenQuotes', routesResult);
       if (routesResult.routes.length == 1) {
         metric.putMetric(`${this.protocol}QuoterSingleRoute`, 1, MetricLoggerUnit.Count);
         percents = [100];

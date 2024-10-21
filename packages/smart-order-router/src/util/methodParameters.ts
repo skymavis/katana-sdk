@@ -1,7 +1,7 @@
-import { ChainId, SWAP_ROUTER_02_ADDRESSES } from '@sky-mavis/katana-core';
+import { ChainId, SWAP_ROUTER_02_ADDRESSES, UNIVERSAL_ROUTER_ADDRESS } from '@sky-mavis/katana-core';
 import { MixedRouteSDK, Protocol, SwapRouter as SwapRouter02, Trade } from '@uniswap/router-sdk';
 import { Currency, TradeType } from '@uniswap/sdk-core';
-import { SwapRouter as UniversalRouter, UNIVERSAL_ROUTER_ADDRESS } from '@uniswap/universal-router-sdk';
+import { SwapRouter as UniversalRouter } from '@uniswap/universal-router-sdk';
 import { Route as V2RouteRaw } from '@uniswap/v2-sdk';
 import { Route as V3RouteRaw } from '@uniswap/v3-sdk';
 import _ from 'lodash';
@@ -156,21 +156,10 @@ export function buildSwapMethodParameters(
   if (swapConfig.type == SwapType.UNIVERSAL_ROUTER) {
     return {
       ...UniversalRouter.swapERC20CallParameters(trade, swapConfig),
-      to: UNIVERSAL_ROUTER_ADDRESS(chainId),
+      to: UNIVERSAL_ROUTER_ADDRESS[chainId]!,
     };
   } else if (swapConfig.type == SwapType.SWAP_ROUTER_02) {
     const { recipient, slippageTolerance, deadline, inputTokenPermit } = swapConfig;
-    console.debug(
-      'buildSwapMethodParameters',
-      trade,
-      { recipient, slippageTolerance, deadline, inputTokenPermit },
-      SwapRouter02.swapCallParameters(trade, {
-        recipient,
-        slippageTolerance,
-        deadlineOrPreviousBlockhash: deadline,
-        inputTokenPermit,
-      }),
-    );
     return {
       ...SwapRouter02.swapCallParameters(trade, {
         recipient,

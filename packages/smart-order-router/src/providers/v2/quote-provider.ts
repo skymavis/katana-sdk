@@ -48,11 +48,6 @@ export class V2QuoteProvider implements IV2QuoteProvider {
     routes: V2Route[],
     providerConfig: ProviderConfig,
   ): Promise<{ routesWithQuotes: V2RouteWithQuotes[] }> {
-    console.debug('getQuotesManyExactIn - v2', {
-      amountIns,
-      routes,
-      providerConfig,
-    });
     return this.getQuotes(amountIns, routes, TradeType.EXACT_INPUT, providerConfig);
   }
 

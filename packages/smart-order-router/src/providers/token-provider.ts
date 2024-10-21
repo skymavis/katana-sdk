@@ -1,7 +1,7 @@
+import { ChainId } from '@sky-mavis/katana-core';
 import { Interface } from '@ethersproject/abi';
 import { BigNumber } from '@ethersproject/bignumber';
 import { parseBytes32String } from '@ethersproject/strings';
-import { ChainId, DEFAULT_ERC20 } from '@sky-mavis/katana-core';
 import { Token } from '@uniswap/sdk-core';
 import _ from 'lodash';
 
@@ -9,6 +9,7 @@ import { IERC20Metadata__factory } from '../types/v3/factories/IERC20Metadata__f
 import { log } from '../util';
 import { IMulticallProvider, Result } from './multicall-provider';
 import { ProviderConfig } from './provider';
+import { USDC_RONIN_MAINNET, USDC_RONIN_TESTNET } from '../routers/alpha-router/gas-models/gas-model';
 
 /**
  * Provider for getting token data.
@@ -32,10 +33,6 @@ export type TokenAccessor = {
   getTokenBySymbol(symbol: string): Token | undefined;
   getAllTokens: () => Token[];
 };
-
-// Some well known tokens on each chain for seeding cache / testing.
-export const USDC_RONIN_TESTNET: Token = DEFAULT_ERC20[ChainId.testnet].USDC;
-export const USDC_RONIN_MAINNET: Token = DEFAULT_ERC20[ChainId.mainnet].USDC;
 
 export class TokenProvider implements ITokenProvider {
   constructor(
@@ -176,7 +173,7 @@ export class TokenProvider implements ITokenProvider {
 export const USDC_ON = (chainId: ChainId): Token => {
   switch (chainId) {
     case ChainId.mainnet:
-      return USDC_RONIN_TESTNET;
+      return USDC_RONIN_MAINNET;
     case ChainId.testnet:
       return USDC_RONIN_TESTNET;
     default:

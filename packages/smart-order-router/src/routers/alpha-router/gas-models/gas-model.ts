@@ -4,7 +4,6 @@ import { CurrencyAmount as CurrencyAmountRaw, Token } from '@uniswap/sdk-core';
 import { Pair } from '@uniswap/v2-sdk';
 import { Pool } from '@uniswap/v3-sdk';
 
-import { USDC_RONIN_MAINNET, USDC_RONIN_TESTNET } from '../../../providers';
 import { ProviderConfig } from '../../../providers/provider';
 import { IV2PoolProvider } from '../../../providers/v2/pool-provider';
 import { WRAPPED_NATIVE_CURRENCY } from '../../../util';
@@ -15,11 +14,16 @@ import {
   V2RouteWithValidQuote,
   V3RouteWithValidQuote,
 } from '../entities/route-with-valid-quote';
+import { DEFAULT_ERC20 } from '@sky-mavis/katana-core';
+
+// Some well known tokens on each chain for seeding cache / testing.
+export const USDC_RONIN_TESTNET: Token = DEFAULT_ERC20[2021].USDC;
+export const USDC_RONIN_MAINNET: Token = DEFAULT_ERC20[2020].USDC;
 
 // When adding new usd gas tokens, ensure the tokens are ordered
 // from tokens with highest decimals to lowest decimals. For example,
 // DAI_AVAX has 18 decimals and comes before USDC_AVAX which has 6 decimals.
-export const usdGasTokensByChain: { [chainId in ChainId]?: Token[] } = {
+export const USD_GAS_TOKEN_BY_CHAIN = {
   [ChainId.mainnet]: [USDC_RONIN_MAINNET],
   [ChainId.testnet]: [USDC_RONIN_TESTNET],
 };

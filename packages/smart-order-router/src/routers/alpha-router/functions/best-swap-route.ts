@@ -15,7 +15,7 @@ import { routeAmountsToString, routeToString } from '../../../util/routes';
 import { SwapOptions } from '../../router';
 import { AlphaRouterConfig } from '../alpha-router';
 import { RouteWithValidQuote } from '../entities/route-with-valid-quote';
-import { L1ToL2GasCosts, usdGasTokensByChain } from '../gas-models';
+import { L1ToL2GasCosts, USD_GAS_TOKEN_BY_CHAIN } from '../gas-models';
 
 export type BestSwapRoute = {
   quote: CurrencyAmount;
@@ -149,7 +149,6 @@ export async function getBestSwapRouteBy(
       }
     });
   });
-  console.debug('percentToSortedQuotes', percentToSortedQuotes);
   const quoteCompFn =
     routeType == TradeType.EXACT_INPUT
       ? (a: CurrencyAmount, b: CurrencyAmount) => a.greaterThan(b)
@@ -364,13 +363,13 @@ export async function getBestSwapRouteBy(
     .map(routeWithValidQuote => routeWithValidQuote.gasEstimate)
     .reduce((sum, routeWithValidQuote) => sum.add(routeWithValidQuote), BigNumber.from(0));
 
-  if (!usdGasTokensByChain[chainId] || !usdGasTokensByChain[chainId]![0]) {
+  if (!USD_GAS_TOKEN_BY_CHAIN[chainId] || !USD_GAS_TOKEN_BY_CHAIN[chainId]![0]) {
     // Each route can use a different stablecoin to account its gas costs.
     // They should all be pegged, and this is just an estimate, so we do a merge
     // to an arbitrary stable.
     throw new Error(`Could not find a USD token for computing gas costs on ${chainId}`);
   }
-  const usdToken = usdGasTokensByChain[chainId]![0]!;
+  const usdToken = USD_GAS_TOKEN_BY_CHAIN[chainId]![0]!;
   const usdTokenDecimals = usdToken.decimals;
 
   // if on L2, calculate the L1 security fee
@@ -475,23 +474,6 @@ export async function getBestSwapRouteBy(
   );
 
   metric.putMetric('PostSplitDone', Date.now() - postSplitNow, MetricLoggerUnit.Milliseconds);
-  console.debug(
-    'getBestSwapRouteBy',
-    'quote',
-    quote,
-    'quoteGasAdjusted',
-    quoteGasAdjusted,
-    'estimatedGasUsed',
-    estimatedGasUsed,
-    'estimatedGasUsedUSD',
-    estimatedGasUsedUSD,
-    'estimatedGasUsedQuoteToken',
-    estimatedGasUsedQuoteToken,
-    'estimatedGasUsedGasToken',
-    estimatedGasUsedGasToken,
-    'routes',
-    routeWithQuotes,
-  );
   return {
     quote,
     quoteGasAdjusted,

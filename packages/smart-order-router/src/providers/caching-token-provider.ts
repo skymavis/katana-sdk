@@ -4,7 +4,8 @@ import _ from 'lodash';
 
 import { log, WRAPPED_NATIVE_CURRENCY } from '../util';
 import { ICache } from './cache';
-import { ITokenProvider, TokenAccessor, USDC_RONIN_MAINNET, USDC_RONIN_TESTNET } from './token-provider';
+import { ITokenProvider, TokenAccessor } from './token-provider';
+import { USDC_RONIN_MAINNET, USDC_RONIN_TESTNET } from '../routers/alpha-router/gas-models/gas-model';
 // These tokens will added to the Token cache on initialization.
 export const CACHE_SEED_TOKENS: {
   [chainId in ChainId]?: { [symbol: string]: Token };

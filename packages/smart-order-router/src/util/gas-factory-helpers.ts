@@ -1,7 +1,7 @@
+import { ChainId } from '@sky-mavis/katana-core';
 import { estimateL1Gas, estimateL1GasCost } from '@eth-optimism/sdk';
 import { BigNumber } from '@ethersproject/bignumber';
 import { BaseProvider, TransactionRequest } from '@ethersproject/providers';
-import { ChainId } from '@sky-mavis/katana-core';
 import { Protocol } from '@uniswap/router-sdk';
 import { Token, TradeType } from '@uniswap/sdk-core';
 import { Pair } from '@uniswap/v2-sdk';
@@ -19,7 +19,7 @@ import {
   MixedRouteWithValidQuote,
   SwapOptions,
   SwapRoute,
-  usdGasTokensByChain,
+  USD_GAS_TOKEN_BY_CHAIN,
   V2RouteWithValidQuote,
   V3RouteWithValidQuote,
 } from '../routers';
@@ -97,7 +97,7 @@ export async function getHighestLiquidityV3USDPool(
   poolProvider: IV3PoolProvider,
   providerConfig?: GasModelProviderConfig,
 ): Promise<Pool> {
-  const usdTokens = usdGasTokensByChain[chainId];
+  const usdTokens = USD_GAS_TOKEN_BY_CHAIN[chainId];
   const wrappedCurrency = WRAPPED_NATIVE_CURRENCY[chainId];
   if (!usdTokens) {
     throw new Error(`Could not find a USD token for computing gas costs on ${chainId}`);

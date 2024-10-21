@@ -1,5 +1,5 @@
-import { BigNumber } from '@ethersproject/bignumber';
 import { ChainId } from '@sky-mavis/katana-core';
+import { BigNumber } from '@ethersproject/bignumber';
 import { Token } from '@uniswap/sdk-core';
 import { Pair } from '@uniswap/v2-sdk';
 import _ from 'lodash';
@@ -16,7 +16,7 @@ import {
   getQuoteThroughNativePool,
   IGasModel,
   IV2GasModelFactory,
-  usdGasTokensByChain,
+  USD_GAS_TOKEN_BY_CHAIN,
 } from '../gas-model';
 
 // Constant cost for doing any swap regardless of pools.
@@ -192,7 +192,7 @@ export class V2HeuristicGasModelFactory extends IV2GasModelFactory {
     poolProvider: IV2PoolProvider,
     providerConfig?: ProviderConfig,
   ): Promise<Pair> {
-    const usdTokens = usdGasTokensByChain[chainId];
+    const usdTokens = USD_GAS_TOKEN_BY_CHAIN[chainId];
 
     if (!usdTokens) {
       throw new Error(`Could not find a USD token for computing gas costs on ${chainId}`);

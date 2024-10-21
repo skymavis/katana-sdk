@@ -339,11 +339,6 @@ export class OnChainQuoteProvider implements IOnChainQuoteProvider {
     routes: TRoute[],
     providerConfig?: ProviderConfig,
   ): Promise<OnChainQuotes<TRoute>> {
-    console.debug('getQuotesManyExactIn', {
-      amountIns,
-      routes,
-      providerConfig,
-    });
     return this.getQuotesManyData(amountIns, routes, 'quoteExactInput', providerConfig);
   }
 
@@ -366,11 +361,6 @@ export class OnChainQuoteProvider implements IOnChainQuoteProvider {
     const optimisticCachedRoutes = _providerConfig?.optimisticCachedRoutes ?? false;
 
     /// Validate that there are no incorrect routes / function combinations
-    console.debug('validateRoutes', {
-      routes,
-      functionName,
-      useMixedRouteQuoter,
-    });
     this.validateRoutes(routes, functionName, useMixedRouteQuoter);
 
     let multicallChunk = this.batchParams.multicallChunk;
@@ -382,7 +372,6 @@ export class OnChainQuoteProvider implements IOnChainQuoteProvider {
       ..._providerConfig,
       blockNumber: _providerConfig?.blockNumber ?? originalBlockNumber + baseBlockOffset,
     };
-    console.debug('blockNumberConfig', { baseBlockOffset, rollback }, providerConfig);
 
     const inputs: [string, string][] = _(routes)
       .flatMap(route => {
@@ -399,13 +388,11 @@ export class OnChainQuoteProvider implements IOnChainQuoteProvider {
           encodedRoute,
           `0x${amount.quotient.toString(16)}`,
         ]);
-        console.debug('routeInputs', amounts, route, routeInputs);
         return routeInputs;
       })
       .value();
 
     const normalizedChunk = Math.ceil(inputs.length / Math.ceil(inputs.length / multicallChunk));
-    console.debug('normalizedChunk', inputs, multicallChunk, normalizedChunk);
     const inputsChunked = _.chunk(inputs, normalizedChunk);
     let quoteStates: QuoteBatchState[] = _.map(inputsChunked, inputChunk => {
       return {
@@ -414,13 +401,6 @@ export class OnChainQuoteProvider implements IOnChainQuoteProvider {
       };
     });
     log.info(
-      `About to get ${inputs.length} quotes in chunks of ${normalizedChunk} [${_.map(inputsChunked, i => i.length).join(
-        ',',
-      )}] ${
-        gasLimitOverride ? `with a gas limit override of ${gasLimitOverride}` : ''
-      } and block number: ${await providerConfig.blockNumber} [Original before offset: ${originalBlockNumber}].`,
-    );
-    console.debug(
       `About to get ${inputs.length} quotes in chunks of ${normalizedChunk} [${_.map(inputsChunked, i => i.length).join(
         ',',
       )}] ${
@@ -485,18 +465,6 @@ export class OnChainQuoteProvider implements IOnChainQuoteProvider {
 
             try {
               totalCallsMade = totalCallsMade + 1;
-              console.debug('callSameFunctionOnContractWithMultipleParams', {
-                address: this.getQuoterAddress(useMixedRouteQuoter),
-                contractInterface: useMixedRouteQuoter
-                  ? IMixedRouteQuoterV1__factory.createInterface()
-                  : IQuoterV2__factory.createInterface(),
-                functionName,
-                functionParams: inputs,
-                providerConfig,
-                additionalConfig: {
-                  gasLimitPerCallOverride: gasLimitOverride,
-                },
-              });
               const results = await this.multicall2Provider.callSameFunctionOnContractWithMultipleParams<
                 [string, string],
                 [BigNumber, BigNumber[], number[], BigNumber] // amountIn/amountOut, sqrtPriceX96AfterList, initializedTicksCrossedList, gasEstimate

@@ -5,11 +5,11 @@ import { FeeAmount, Pool } from '@uniswap/v3-sdk';
 import JSBI from 'jsbi';
 import _ from 'lodash';
 
+import { USDC_RONIN_MAINNET, USDC_RONIN_TESTNET } from '../../routers/alpha-router/gas-models/gas-model';
 import { unparseFeeAmount } from '../../util/amounts';
 import { WRAPPED_NATIVE_CURRENCY } from '../../util/chains';
 import { log } from '../../util/log';
 import { ProviderConfig } from '../provider';
-import { USDC_RONIN_MAINNET, USDC_RONIN_TESTNET } from '../token-provider';
 import { IV3PoolProvider } from './pool-provider';
 import { IV3SubgraphProvider, V3SubgraphPool } from './subgraph-provider';
 

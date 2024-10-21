@@ -61,9 +61,6 @@ export class V2Quoter extends BaseQuoter<V2CandidatePools, V2Route> {
     // result in good prices.
     const { poolAccessor, candidatePools } = v2CandidatePools;
     const poolsRaw = poolAccessor.getAllPools();
-    console.debug('getRoutes - v2', {
-      poolsRaw,
-    });
     // Drop any pools that contain tokens that can not be transferred according to the token validator.
     const pools = await this.applyTokenValidatorToPools(
       poolsRaw,
