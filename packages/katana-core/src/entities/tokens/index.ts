@@ -1,5 +1,4 @@
-import { ChainId } from 'configs/chain';
-
+import { ChainId } from '../../configs/chain';
 import { AXS, BANANA, BERRY, PIXEL, SLP, USDC, WETH, WRON } from './mainnet';
 import {
   AXS_TESTNET,

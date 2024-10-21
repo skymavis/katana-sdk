@@ -1,7 +1,7 @@
 import { Currency, NativeCurrency, Token } from '@uniswap/sdk-core';
-import { ChainId } from 'configs/chain';
 import invariant from 'tiny-invariant';
 
+import { ChainId } from '../configs/chain';
 import { DEFAULT_ERC20 } from './tokens';
 
 /**

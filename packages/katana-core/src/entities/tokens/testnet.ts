@@ -1,5 +1,6 @@
 import { Token } from '@uniswap/sdk-core';
-import { ChainId } from 'configs/chain';
+
+import { ChainId } from '../../configs/chain';
 
 const WRON_TESTNET = new Token(
   ChainId.testnet,
