@@ -62,6 +62,7 @@
   "dependencies": {
     "@uniswap/sdk-core": "5.3.0",
     "@uniswap/v3-sdk": "3.13.0",
+    "@uniswap/v2-sdk": "4.3.2",
     "@ethersproject/address": "5.0.2",
     "@ethersproject/solidity": "5.0.9",
     "tiny-invariant": "1.1.0"
