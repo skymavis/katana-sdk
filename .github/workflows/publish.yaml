@@ -34,6 +34,12 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
 
+      - name: Publish @sky-mavis/smart-order-router
+        run: cd packages/smart-order-router && npm publish --access=public
+        if: ${{ true == startsWith(github.event.release.tag_name, 'smart-order-router') }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
       - name: Publish @sky-mavis/katana-swap
         run: cd packages/katana-swap && npm publish --access=public
         if: ${{ true == startsWith(github.event.release.tag_name, 'katana-swap') }}
