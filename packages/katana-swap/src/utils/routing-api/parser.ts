@@ -1,3 +1,4 @@
+import { CustomPair } from '@sky-mavis/katana-core';
 import { CurrencyAmount, Token } from '@uniswap/sdk-core';
 import { PoolType } from '@uniswap/universal-router-sdk';
 import { Pair } from '@uniswap/v2-sdk';
@@ -39,7 +40,7 @@ const parsePool = ({ fee, sqrtRatioX96, liquidity, tickCurrent, tokenIn, tokenOu
 };
 
 const parsePair = ({ reserve0, reserve1 }: V2PoolInRoute): Pair => {
-  return new Pair(
+  return new CustomPair(
     CurrencyAmount.fromRawAmount(parseTokenFromRouteQuote(reserve0.token), reserve0.quotient),
     CurrencyAmount.fromRawAmount(parseTokenFromRouteQuote(reserve1.token), reserve1.quotient),
   );
