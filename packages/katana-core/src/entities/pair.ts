@@ -76,7 +76,7 @@ export class CustomPair extends Pair {
     if (JSBI.equal(outputAmount.quotient, BigInt_0)) {
       throw new InsufficientInputAmountError();
     }
-    return [outputAmount, new Pair(inputReserve.add(inputAmount), outputReserve.subtract(outputAmount))];
+    return [outputAmount, new CustomPair(inputReserve.add(inputAmount), outputReserve.subtract(outputAmount))];
   }
 
   public getInputAmount(
@@ -101,6 +101,6 @@ export class CustomPair extends Pair {
       outputAmount.currency.equals(this.token0) ? this.token1 : this.token0,
       JSBI.add(JSBI.divide(numerator, denominator), BigInt_1),
     );
-    return [inputAmount, new Pair(inputReserve.add(inputAmount), outputReserve.subtract(outputAmount))];
+    return [inputAmount, new CustomPair(inputReserve.add(inputAmount), outputReserve.subtract(outputAmount))];
   }
 }

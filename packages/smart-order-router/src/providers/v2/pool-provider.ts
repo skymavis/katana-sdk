@@ -1,5 +1,5 @@
+import { ChainId, computePairAddress, CustomPair } from '@sky-mavis/katana-core';
 import { BigNumber } from '@ethersproject/bignumber';
-import { ChainId, computePairAddress } from '@sky-mavis/katana-core';
 import { Token } from '@uniswap/sdk-core';
 import { Pair } from '@uniswap/v2-sdk';
 import retry, { Options as RetryOptions } from 'async-retry';
@@ -158,7 +158,7 @@ export class V2PoolProvider implements IV2PoolProvider {
 
       const { reserve0, reserve1 } = reservesResult.result;
 
-      const pool = new Pair(
+      const pool = new CustomPair(
         CurrencyAmount.fromRawAmount(token0, reserve0.toString()),
         CurrencyAmount.fromRawAmount(token1, reserve1.toString()),
       );
@@ -201,7 +201,11 @@ export class V2PoolProvider implements IV2PoolProvider {
       return { poolAddress: cachedAddress, token0, token1 };
     }
 
-    const poolAddress = computePairAddress({ tokenA: token0, tokenB: token1, chainId: this.chainId });
+    const poolAddress = computePairAddress({
+      tokenA: token0,
+      tokenB: token1,
+      chainId: this.chainId,
+    });
 
     this.POOL_ADDRESS_CACHE[cacheKey] = poolAddress;
 
