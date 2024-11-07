@@ -1,6 +1,7 @@
 import { ChainId } from '@sky-mavis/katana-core';
 import { BigNumber } from 'ethers';
-import { getRonBalance, getTokenBalances } from 'functions/fetch-data/balance';
+
+import { getRonBalance, getTokenBalances } from '../../fetch-data';
 
 type CheckIsInsufficientBalanceArgs = {
   chainId: ChainId;

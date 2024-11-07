@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { KATANA_ROUTING_API_URL } from 'constants/url';
-import { KatanaTrade } from 'types/katana-trade';
-import { ClassicQuoteData, GetQuoteArgs } from 'types/routing-api';
-import { getQuoteQueryParams, transformQuoteToTrade } from 'utils/routing-api';
+
+import { KATANA_ROUTING_API_URL } from '../../../constants/url';
+import { ClassicQuoteData, GetQuoteArgs, KatanaTrade } from '../../../types';
+import { getQuoteQueryParams, transformQuoteToTrade } from '../../../utils/routing-api';
 
 /**
  * Get quote from routing API

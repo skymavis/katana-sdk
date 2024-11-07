@@ -1,6 +1,7 @@
 import { BigNumber } from 'ethers';
-import { getTokenAllowance } from 'functions/fetch-data/approval/get-token-allowance';
-import { CheckIsTokenApprovedArgs } from 'types/approve-token';
+
+import { CheckIsTokenApprovedArgs } from '../../../types';
+import { getTokenAllowance } from '../../fetch-data';
 
 /**
  * Check if token is approved for a given owner and spender

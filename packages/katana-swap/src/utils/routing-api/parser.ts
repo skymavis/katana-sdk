@@ -4,7 +4,8 @@ import { PoolType } from '@uniswap/universal-router-sdk';
 import { Pair } from '@uniswap/v2-sdk';
 import { FeeAmount, Pool } from '@uniswap/v3-sdk';
 import { BigNumber } from 'ethers';
-import { TokenInRoute, V2PoolInRoute, V3PoolInRoute } from 'types/routing-api';
+
+import { TokenInRoute, V2PoolInRoute, V3PoolInRoute } from '../../types';
 
 const parseTokenFromRouteQuote = ({
   address,

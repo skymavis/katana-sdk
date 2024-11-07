@@ -1,9 +1,10 @@
 import { ChainId } from '@sky-mavis/katana-core';
-import { MULTICALL2_ADDRESSES } from 'constants/address';
-import { Multicall2, Multicall2__factory } from 'contracts';
 import { BigNumber, Contract, ethers, Signer } from 'ethers';
-import { FunctionFragment, Interface } from 'ethers/lib/utils';
-import { CallInput, CallResult, CallState, MethodArg, MethodArgs, OptionalMethodInputs, Result } from 'types/multicall';
+import { FunctionFragment, Interface, Result } from 'ethers/lib/utils';
+
+import { MULTICALL2_ADDRESSES } from '../constants/address';
+import { Multicall2, Multicall2__factory } from '../contracts';
+import { CallInput, CallResult, CallState, MethodArg, MethodArgs, OptionalMethodInputs } from '../types/multicall';
 
 const INVALID_CALL_STATE: CallState = { valid: false, result: undefined, error: false };
 

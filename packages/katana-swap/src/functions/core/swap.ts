@@ -2,14 +2,13 @@ import { ChainId, UNIVERSAL_ROUTER_ADDRESS } from '@sky-mavis/katana-core';
 import { Percent } from '@uniswap/sdk-core';
 import { SwapRouter } from '@uniswap/universal-router-sdk';
 import { toHex } from '@uniswap/v3-sdk';
-import { DEFAULT_SWAP_SLIPPAGE, DEFAULT_TX_DEADLINE } from 'constants/misc';
-import { KatanaTrade } from 'types/katana-trade';
-import { PermitSignature } from 'types/permit';
-import { WalletInfo } from 'types/wallet';
-import { toReadableError } from 'utils/errors';
-import { getDeadline } from 'utils/get-deadline';
-import isZero from 'utils/is-zero';
-import { calculateGasMargin, getUniversalRouterFeeFields } from 'utils/swap';
+
+import { DEFAULT_SWAP_SLIPPAGE, DEFAULT_TX_DEADLINE } from '../../constants/misc';
+import { KatanaTrade, PermitSignature, WalletInfo } from '../../types';
+import { toReadableError } from '../../utils/errors';
+import { getDeadline } from '../../utils/get-deadline';
+import isZero from '../../utils/is-zero';
+import { calculateGasMargin, getUniversalRouterFeeFields } from '../../utils/swap';
 
 type SwapArgs = {
   chainId: ChainId;

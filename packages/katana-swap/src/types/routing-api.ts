@@ -3,7 +3,8 @@ import { MixedRouteSDK } from '@uniswap/router-sdk';
 import { Currency, CurrencyAmount, Percent, Token, TradeType } from '@uniswap/sdk-core';
 import { Route as V2Route } from '@uniswap/v2-sdk';
 import { Route as V3Route } from '@uniswap/v3-sdk';
-import { QuoteIntent, SwapRouterNativeAssets } from 'constants/enum';
+
+import { QuoteIntent, SwapRouterNativeAssets } from '../constants/enum';
 
 type TradeTypeParam = 'exactIn' | 'exactOut';
 

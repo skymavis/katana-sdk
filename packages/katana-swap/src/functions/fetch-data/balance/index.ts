@@ -1,11 +1,12 @@
 import { ChainId } from '@sky-mavis/katana-core';
-import { MULTICALL2_ADDRESSES } from 'constants/address';
-import { Erc20__factory, Multicall2, Multicall2__factory } from 'contracts';
 import { BigNumber } from 'ethers';
-import { checkAddress } from 'utils/address';
-import { getContract } from 'utils/contract';
-import { multipleContractSingleData } from 'utils/multicall';
-import { getRoninReadProvider } from 'utils/provider';
+
+import { MULTICALL2_ADDRESSES } from '../../../constants/address';
+import { Erc20__factory, Multicall2, Multicall2__factory } from '../../../contracts';
+import { checkAddress } from '../../../utils/address';
+import { getContract } from '../../../utils/contract';
+import { multipleContractSingleData } from '../../../utils/multicall';
+import { getRoninReadProvider } from '../../../utils/provider';
 
 type GetTokenBalancesArgs = {
   tokens: string[];

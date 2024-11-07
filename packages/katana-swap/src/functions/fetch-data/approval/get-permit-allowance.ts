@@ -1,10 +1,11 @@
 import { UNIVERSAL_ROUTER_ADDRESS } from '@sky-mavis/katana-core';
-import { Permit2, Permit2__factory } from 'contracts';
 import { BigNumber } from 'ethers';
-import { GetPermitAllowanceArgs } from 'types/permit';
-import { checkAddress } from 'utils/address';
-import { getContract } from 'utils/contract';
-import { getRoninReadProvider } from 'utils/provider';
+
+import { Permit2, Permit2__factory } from '../../../contracts';
+import { GetPermitAllowanceArgs } from '../../../types';
+import { checkAddress } from '../../../utils/address';
+import { getContract } from '../../../utils/contract';
+import { getRoninReadProvider } from '../../../utils/provider';
 
 /**
  * Get permit allowance data of a token for a given owner and spender

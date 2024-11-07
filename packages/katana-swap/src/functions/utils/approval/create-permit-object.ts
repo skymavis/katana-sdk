@@ -1,6 +1,7 @@
 import { UNIVERSAL_ROUTER_ADDRESS } from '@sky-mavis/katana-core';
 import { MaxAllowanceTransferAmount } from '@uniswap/permit2-sdk';
-import { CreatePermitArgs, Permit } from 'types/permit';
+
+import { CreatePermitArgs, Permit } from '../../../types';
 
 const PERMIT_EXPIRATION = 2592000000; // 30 days in milliseconds
 const PERMIT_SIG_EXPIRATION = 1800000; // 30 minutes in milliseconds

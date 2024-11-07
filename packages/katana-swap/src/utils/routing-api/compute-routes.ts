@@ -4,10 +4,16 @@ import { Currency, CurrencyAmount } from '@uniswap/sdk-core';
 import { PoolType } from '@uniswap/universal-router-sdk';
 import { Route as V2Route } from '@uniswap/v2-sdk';
 import { Route as V3Route } from '@uniswap/v3-sdk';
-import { SwapRouterNativeAssets } from 'constants/enum';
-import { KatanaTradeRoutes } from 'types/katana-trade';
-import { ClassicQuoteData, GetQuoteArgs, RouteResult, V2PoolInRoute, V3PoolInRoute } from 'types/routing-api';
 
+import { SwapRouterNativeAssets } from '../../constants/enum';
+import {
+  ClassicQuoteData,
+  GetQuoteArgs,
+  KatanaTradeRoutes,
+  RouteResult,
+  V2PoolInRoute,
+  V3PoolInRoute,
+} from '../../types';
 import { parsePair, parsePool, parsePoolOrPair, parseTokenFromRouteQuote } from './parser';
 
 const isVersionedRoute = <T extends V2PoolInRoute | V3PoolInRoute>(

@@ -1,6 +1,4 @@
-import { KatanaTrade } from 'types/katana-trade';
-import { GetQuoteArgs } from 'types/routing-api';
-
+import { GetQuoteArgs, KatanaTrade } from '../../../types';
 import { getQuote } from './get-quote';
 
 /**

@@ -2,7 +2,8 @@ import { TradeType } from '@uniswap/sdk-core';
 import { FlatFeeOptions } from '@uniswap/universal-router-sdk';
 import { FeeOptions } from '@uniswap/v3-sdk';
 import { BigNumber } from 'ethers';
-import { KatanaTrade } from 'types/katana-trade';
+
+import { KatanaTrade } from '../types';
 
 type UniversalRouterFeeField = { fee: FeeOptions } | { flatFee: FlatFeeOptions };
 

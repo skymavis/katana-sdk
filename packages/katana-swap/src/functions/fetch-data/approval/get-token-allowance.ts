@@ -1,10 +1,11 @@
 import { PERMIT2_ADDRESS } from '@sky-mavis/katana-core';
-import { Erc20, Erc20__factory } from 'contracts';
 import { BigNumber } from 'ethers';
-import { GetTokenAllowanceArgs } from 'types/approve-token';
-import { checkAddress } from 'utils/address';
-import { getContract } from 'utils/contract';
-import { getRoninReadProvider } from 'utils/provider';
+
+import { Erc20, Erc20__factory } from '../../../contracts';
+import { GetTokenAllowanceArgs } from '../../../types';
+import { checkAddress } from '../../../utils/address';
+import { getContract } from '../../../utils/contract';
+import { getRoninReadProvider } from '../../../utils/provider';
 
 /**
  * Get allowance of a token for a given owner and spender

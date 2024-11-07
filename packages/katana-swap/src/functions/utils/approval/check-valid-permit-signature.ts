@@ -1,6 +1,7 @@
 import { UNIVERSAL_ROUTER_ADDRESS } from '@sky-mavis/katana-core';
-import { AVERAGE_RONIN_L1_BLOCK_TIME } from 'constants/misc';
-import { CheckIsValidPermitAllowanceArgs, CheckIsValidPermitAllowanceSignatureArgs } from 'types/permit';
+
+import { AVERAGE_RONIN_L1_BLOCK_TIME } from '../../../constants/misc';
+import { CheckIsValidPermitAllowanceArgs, CheckIsValidPermitAllowanceSignatureArgs } from '../../../types';
 
 /**
  * Get the interval time to check if the permit signature is still valid

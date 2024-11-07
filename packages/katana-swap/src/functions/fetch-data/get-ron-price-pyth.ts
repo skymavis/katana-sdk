@@ -1,9 +1,10 @@
 import { ChainId } from '@sky-mavis/katana-core';
-import { PYTH_ADDRESSES } from 'constants/address';
-import { PYTH_RON_ID } from 'constants/price';
-import { Pyth, Pyth__factory } from 'contracts';
-import { getContract } from 'utils/contract';
-import { getRoninReadProvider } from 'utils/provider';
+
+import { PYTH_ADDRESSES } from '../../constants/address';
+import { PYTH_RON_ID } from '../../constants/price';
+import { Pyth, Pyth__factory } from '../../contracts';
+import { getContract } from '../../utils/contract';
+import { getRoninReadProvider } from '../../utils/provider';
 
 /**
  * Get RON price (USD) from Pyth

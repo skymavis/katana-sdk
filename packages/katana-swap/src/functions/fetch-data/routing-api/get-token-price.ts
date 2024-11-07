@@ -1,8 +1,8 @@
 import { ChainId, RON } from '@sky-mavis/katana-core';
 import { Currency, Price, Token, TradeType } from '@uniswap/sdk-core';
-import { QuoteIntent, SwapRouterNativeAssets } from 'constants/enum';
-import { RON_AMOUNT_OUT, STABLECOIN_AMOUNT_OUT } from 'constants/price';
 
+import { QuoteIntent, SwapRouterNativeAssets } from '../../../constants/enum';
+import { RON_AMOUNT_OUT, STABLECOIN_AMOUNT_OUT } from '../../../constants/price';
 import { getQuote } from './get-quote';
 
 type GetUSDCPriceArgs = {

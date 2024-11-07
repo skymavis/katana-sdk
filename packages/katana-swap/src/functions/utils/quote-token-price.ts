@@ -1,6 +1,7 @@
 import { RON } from '@sky-mavis/katana-core';
 import { Currency, Price, Token } from '@uniswap/sdk-core';
-import tryParseCurrencyAmount from 'utils/try-parse-currency-amount';
+
+import tryParseCurrencyAmount from '../../utils/try-parse-currency-amount';
 
 type QuoteTokenPriceArgs = {
   tokenPrice: Price<Currency, Token | RON> | null;

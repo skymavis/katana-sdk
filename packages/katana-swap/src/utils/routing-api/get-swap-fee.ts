@@ -1,6 +1,7 @@
 import { Percent } from '@uniswap/sdk-core';
-import { BIPS_BASE } from 'constants/misc';
-import { ClassicQuoteData, SwapFeeInfo } from 'types/routing-api';
+
+import { BIPS_BASE } from '../../constants/misc';
+import { ClassicQuoteData, SwapFeeInfo } from '../../types';
 
 const getSwapFee = (data: ClassicQuoteData): SwapFeeInfo | undefined => {
   const { portionAmount, portionBips, portionRecipient } = data;

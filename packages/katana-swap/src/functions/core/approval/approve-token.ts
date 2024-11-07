@@ -1,10 +1,11 @@
 import { PERMIT2_ADDRESS } from '@sky-mavis/katana-core';
 import { MaxUint256 } from '@uniswap/sdk-core';
-import { Erc20, Erc20__factory } from 'contracts';
 import { ContractTransaction } from 'ethers';
-import { ApproveTokenArgs } from 'types/approve-token';
-import { getContract } from 'utils/contract';
-import { toReadableError } from 'utils/errors';
+
+import { Erc20, Erc20__factory } from '../../../contracts';
+import { ApproveTokenArgs } from '../../../types';
+import { getContract } from '../../../utils/contract';
+import { toReadableError } from '../../../utils/errors';
 
 /**
  * Approve token

@@ -1,9 +1,10 @@
 import { ChainId } from '@sky-mavis/katana-core';
 import { Token } from '@uniswap/sdk-core';
 import axios from 'axios';
-import { DAPP_OFFCHAIN_URL } from 'constants/url';
-import { IAllPublicTokens } from 'types/token';
-import { toReadableError } from 'utils/errors';
+
+import { DAPP_OFFCHAIN_URL } from '../../constants/url';
+import { IAllPublicTokens } from '../../types';
+import { toReadableError } from '../../utils/errors';
 
 /**
  * Get all tokens from Katana V2 and V3 subgraph

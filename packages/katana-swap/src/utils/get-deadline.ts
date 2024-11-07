@@ -1,9 +1,10 @@
 import { ChainId } from '@sky-mavis/katana-core';
-import { MULTICALL2_ADDRESSES } from 'constants/address';
-import { Multicall2, Multicall2__factory } from 'contracts';
 import { BigNumber } from 'ethers';
-import { getContract } from 'utils/contract';
-import { getRoninReadProvider } from 'utils/provider';
+
+import { MULTICALL2_ADDRESSES } from '../constants/address';
+import { Multicall2, Multicall2__factory } from '../contracts';
+import { getContract } from './contract';
+import { getRoninReadProvider } from './provider';
 
 /**
  * An asynchronous function which will get the block timestamp and combine it with user settings for a deadline.

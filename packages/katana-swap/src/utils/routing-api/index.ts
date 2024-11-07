@@ -1,9 +1,15 @@
 import { TradeType } from '@uniswap/sdk-core';
-import { QuoteIntent } from 'constants/enum';
-import { DEFAULT_SWAP_SLIPPAGE } from 'constants/misc';
-import { KatanaTrade, KatanaTradeRoutes } from 'types/katana-trade';
-import { ClassicQuoteData, GetQuoteArgs, QuoteQueryParams, SwapFeeInfo } from 'types/routing-api';
 
+import { QuoteIntent } from '../../constants/enum';
+import { DEFAULT_SWAP_SLIPPAGE } from '../../constants/misc';
+import {
+  ClassicQuoteData,
+  GetQuoteArgs,
+  KatanaTrade,
+  KatanaTradeRoutes,
+  QuoteQueryParams,
+  SwapFeeInfo,
+} from '../../types';
 import { computeRoutes } from './compute-routes';
 import { getSwapFee } from './get-swap-fee';
 

@@ -1,7 +1,7 @@
 import { JsonRpcSigner, Provider, StaticJsonRpcProvider, Web3Provider } from '@ethersproject/providers';
-import { ZERO_ADDRESS } from 'constants/misc';
 import { BaseContract, Contract, ContractInterface } from 'ethers';
 
+import { ZERO_ADDRESS } from '../constants/misc';
 import { checkAddress } from './address';
 
 const getProviderOrSigner = (provider: Web3Provider, account?: string): Provider | JsonRpcSigner => {
