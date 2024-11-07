@@ -3,7 +3,6 @@ import { GetQuoteArgs } from 'types/routing-api';
 
 import { getQuote } from './get-quote';
 
-type GetBestTradeArgs = Omit<GetQuoteArgs, 'intent'>;
 /**
  * Get best trade using routing API
  * @param chainId - Chain ID
@@ -16,7 +15,7 @@ type GetBestTradeArgs = Omit<GetQuoteArgs, 'intent'>;
  * @param recipient - Recipient (Optional)
  * @returns Object Trade | null if no route is found
  */
-const getBestTrade = (args: GetBestTradeArgs): Promise<KatanaTrade | null> => {
+const getBestTrade = (args: GetQuoteArgs): Promise<KatanaTrade | null> => {
   return getQuote(args);
 };
 
