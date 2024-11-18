@@ -52,14 +52,14 @@ const RONIN_MAINNET_ADDRESSES: ChainAddresses = {
 const RONIN_TESTNET_ADDRESSES: ChainAddresses = {
   v3CoreFactoryAddress: '0x4E7236ff45d69395DDEFE1445040A8f3C7CD8819',
   multicallAddress: '0x5938EF96F0C7c75CED7132D083ff08362C7FF70a',
-  quoterAddress: '0xB2Cc117Ed42cBE07710C90903bE46D2822bcde45',
+  quoterAddress: '0x953368BB464010A5E24f8c3da79C3EC5C0073568',
   v3MigratorAddress: '0x8cF4743642acF849eff54873e24d46D0f3437593',
   nonfungiblePositionManagerAddress: '0x7C2716803c09cd5eeD78Ba40117084af3c803565',
   tickLensAddress: '0x812F9B77473D8847767cfFF087B49b628458fc65',
   swapRouter02Address: '0x5e0549354606efc1de33ea618d2183d81c62c193',
-  mixedRouteQuoterV1Address: '0x9FC1eaBd6C8fCFbd2c43c3641DC612Ffa61fcACd',
+  mixedRouteQuoterV1Address: '0x7eA0900b2F3aA0859BDB826B4009C9195C85A016',
   permit2Address: '0xCcf4a457E775f317e0Cf306EFDda14Cc8084F82C',
-  universalRouterAddress: '0x8Cd8F15E956636e6527d2EC2ea669675A74153CF',
+  universalRouterAddress: '0x2A50959B27387b4452198d7783A3d353858563a4',
 };
 
 export const CHAIN_TO_ADDRESSES_MAP: Record<ChainId, ChainAddresses> = {
