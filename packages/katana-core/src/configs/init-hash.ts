@@ -6,7 +6,7 @@ const KATANA_V2_INIT_CODE_HASH: Record<ChainId, string> = {
 };
 
 const KATANA_V3_INIT_CODE_HASH: Record<ChainId, string> = {
-  [ChainId.mainnet]: '', // tbd
+  [ChainId.mainnet]: '0xb381dabeb6037396a764deb39e57a4a3f75b641ce3e9944b1e4b18d036e322e1',
   [ChainId.testnet]: '0xb381dabeb6037396a764deb39e57a4a3f75b641ce3e9944b1e4b18d036e322e1',
 };
 

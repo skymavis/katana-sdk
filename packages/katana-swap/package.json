@@ -43,7 +43,7 @@
   },
   "homepage": "https://github.com/skymavis/katana-sdk",
   "dependencies": {
-    "@sky-mavis/katana-core": "0.0.1-alpha-2",
+    "@sky-mavis/katana-core": "0.0.1-alpha-3",
     "ethers": "5.7.2",
     "@uniswap/permit2-sdk": "1.3.0",
     "@uniswap/universal-router-sdk": "2.2.0",

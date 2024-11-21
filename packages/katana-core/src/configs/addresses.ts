@@ -37,16 +37,16 @@ export const KATANA_GOVERNANCE_ADDRESSES: IAddressMap = {
 
 // tdb
 const RONIN_MAINNET_ADDRESSES: ChainAddresses = {
-  v3CoreFactoryAddress: '',
-  multicallAddress: '',
-  quoterAddress: '',
-  v3MigratorAddress: '',
-  nonfungiblePositionManagerAddress: '',
-  tickLensAddress: '',
-  swapRouter02Address: '',
-  mixedRouteQuoterV1Address: '',
-  permit2Address: '',
-  universalRouterAddress: '',
+  v3CoreFactoryAddress: '0x1f0B70d9A137e3cAEF0ceAcD312BC5f81Da0cC0c',
+  multicallAddress: '0x48365CcA8769c926ffbFE5B43f0e360363e8ee70',
+  quoterAddress: '0x84Ab2f9Fdc4Bf66312b0819D879437b8749EfDf2',
+  v3MigratorAddress: '0x0124c9Ce7E77eD166f6d53AF679B491555b5C0F7',
+  nonfungiblePositionManagerAddress: '0x7cF0fb64d72b733695d77d197c664e90D07cF45A',
+  tickLensAddress: '0x05Ad77F1e419Dac0B580a2Ca08CB1e3e33F946Ee',
+  swapRouter02Address: '0xC05AFC8c9353c1dd5f872EcCFaCD60fd5A2a9aC7',
+  mixedRouteQuoterV1Address: '0xebdC1bb4DF7627573A480bBEEB30e8919d21BC90',
+  permit2Address: '0x771CA29e483Df5447E20a89e0F00E1DAF09eF534',
+  universalRouterAddress: '0x5F0aCDD3eC767514fF1BF7e79949640bf94576BD',
 };
 
 const RONIN_TESTNET_ADDRESSES: ChainAddresses = {
@@ -56,7 +56,7 @@ const RONIN_TESTNET_ADDRESSES: ChainAddresses = {
   v3MigratorAddress: '0x8cF4743642acF849eff54873e24d46D0f3437593',
   nonfungiblePositionManagerAddress: '0x7C2716803c09cd5eeD78Ba40117084af3c803565',
   tickLensAddress: '0x812F9B77473D8847767cfFF087B49b628458fc65',
-  swapRouter02Address: '0x5e0549354606efc1de33ea618d2183d81c62c193',
+  swapRouter02Address: '0x3BD36748D17e322cFB63417B059Bcc1059012D83',
   mixedRouteQuoterV1Address: '0x7eA0900b2F3aA0859BDB826B4009C9195C85A016',
   permit2Address: '0xCcf4a457E775f317e0Cf306EFDda14Cc8084F82C',
   universalRouterAddress: '0x2A50959B27387b4452198d7783A3d353858563a4',
@@ -130,7 +130,7 @@ export const MIXED_ROUTE_QUOTER_V1_ADDRESSES: IAddressMap = SUPPORTED_CHAINS.red
 export const SWAP_ROUTER_02_ADDRESSES = (chainId: number) => {
   if (SUPPORTED_CHAINS.includes(chainId)) {
     const id = chainId as ChainId;
-    return CHAIN_TO_ADDRESSES_MAP[id].swapRouter02Address ?? '0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45';
+    return CHAIN_TO_ADDRESSES_MAP[id].swapRouter02Address;
   }
   return '';
 };
