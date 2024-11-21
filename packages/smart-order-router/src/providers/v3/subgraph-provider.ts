@@ -9,6 +9,7 @@ import { log, metric } from '../../util';
 import { ProviderConfig } from '../provider';
 import { V2SubgraphPool } from '../v2/subgraph-provider';
 
+const SUBGRAPH_DOMAIN_MAINNET_BASE = 'https://thegraph-v2.roninchain.com';
 export interface V3SubgraphPool {
   id: string;
   feeTier: string;
@@ -45,7 +46,7 @@ export const printV3SubgraphPool = (s: V3SubgraphPool) => `${s.token0.id}/${s.to
 export const printV2SubgraphPool = (s: V2SubgraphPool) => `${s.token0.id}/${s.token1.id}`;
 
 const SUBGRAPH_URL_BY_CHAIN: { [chainId in ChainId]?: string } = {
-  [ChainId.mainnet]: '',
+  [ChainId.mainnet]: `${SUBGRAPH_DOMAIN_MAINNET_BASE}/subgraphs/name/axieinfinity/katana-v3`,
   [ChainId.testnet]: 'https://saigon-thegraph.roninchain.com/subgraphs/name/axieinfinity/katana-v3',
 };
 
