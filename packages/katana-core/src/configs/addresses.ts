@@ -130,7 +130,7 @@ export const MIXED_ROUTE_QUOTER_V1_ADDRESSES: IAddressMap = SUPPORTED_CHAINS.red
 export const SWAP_ROUTER_02_ADDRESSES = (chainId: number) => {
   if (SUPPORTED_CHAINS.includes(chainId)) {
     const id = chainId as ChainId;
-    return CHAIN_TO_ADDRESSES_MAP[id].swapRouter02Address;
+    return CHAIN_TO_ADDRESSES_MAP[id].swapRouter02Address ?? "";
   }
   return '';
 };
