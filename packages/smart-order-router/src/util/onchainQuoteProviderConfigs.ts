@@ -41,7 +41,7 @@ export function constructSameBatchParamsMap<T extends BatchParams>(
 }
 
 export const DEFAULT_BATCH_PARAMS: BatchParams = {
-  multicallChunk: 70,
+  multicallChunk: 42,
   gasLimitPerCall: 705_000,
   quoteMinSuccessRate: 0.15,
 };
@@ -66,7 +66,7 @@ export function constructSameGasErrorFailureOverridesMap<T extends FailureOverri
 
 export const DEFAULT_GAS_ERROR_FAILURE_OVERRIDES: FailureOverrides = {
   gasLimitOverride: 2_000_000,
-  multicallChunk: 25,
+  multicallChunk: 15,
 };
 
 export const GAS_ERROR_FAILURE_OVERRIDES = {
@@ -87,7 +87,7 @@ export function constructSameSuccessRateFailureOverridesMap<T extends FailureOve
 
 export const DEFAULT_SUCCESS_RATE_FAILURE_OVERRIDES: FailureOverrides = {
   gasLimitOverride: 1_300_000,
-  multicallChunk: 38,
+  multicallChunk: 23,
 };
 
 export const SUCCESS_RATE_FAILURE_OVERRIDES = {
