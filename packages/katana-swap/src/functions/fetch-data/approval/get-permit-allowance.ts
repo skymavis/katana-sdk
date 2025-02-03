@@ -1,4 +1,4 @@
-import { UNIVERSAL_ROUTER_ADDRESS } from '@sky-mavis/katana-core';
+import { PERMIT2_ADDRESS, UNIVERSAL_ROUTER_ADDRESS } from '@sky-mavis/katana-core';
 import { BigNumber } from 'ethers';
 
 import { Permit2, Permit2__factory } from '../../../contracts';
@@ -32,7 +32,7 @@ const getPermitAllowance = async ({
   const spenderAddress = spender || UNIVERSAL_ROUTER_ADDRESS[chainId];
 
   const contract = getContract({
-    address: tokenAddress,
+    address: PERMIT2_ADDRESS[chainId],
     ABI: Permit2__factory.createInterface(),
     provider: getRoninReadProvider(chainId),
   }) as Permit2;

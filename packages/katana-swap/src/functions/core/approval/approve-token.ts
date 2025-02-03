@@ -27,8 +27,7 @@ const approveToken = async ({
   const contract = getContract({
     address: tokenAddress,
     ABI: Erc20__factory.createInterface(),
-    provider: wallet.provider,
-    account: wallet.account,
+    ...wallet,
   }) as Erc20;
 
   if (!contract) {

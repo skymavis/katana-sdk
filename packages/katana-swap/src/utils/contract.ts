@@ -4,8 +4,11 @@ import { BaseContract, Contract, ContractInterface } from 'ethers';
 import { ZERO_ADDRESS } from '../constants/misc';
 import { checkAddress } from './address';
 
-const getProviderOrSigner = (provider: Web3Provider, account?: string): Provider | JsonRpcSigner => {
-  return account ? provider.getSigner(account).connectUnchecked() : provider;
+const getProviderOrSigner = (
+  provider: Web3Provider | StaticJsonRpcProvider,
+  account?: string,
+): Provider | JsonRpcSigner => {
+  return account ? provider.getSigner(account) : provider;
 };
 
 type GetContractArgs = {
@@ -19,12 +22,8 @@ const getContract = <T extends BaseContract>({ address, ABI, provider, account }
   if (!checkAddress(address) || address === ZERO_ADDRESS) {
     return null;
   }
-
-  return new Contract(
-    address,
-    ABI,
-    provider instanceof Web3Provider ? getProviderOrSigner(provider, account) : provider,
-  ) as T;
+  const signer = getProviderOrSigner(provider, account);
+  return new Contract(address, ABI, signer) as T;
 };
 
 export { getContract };

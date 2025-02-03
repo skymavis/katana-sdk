@@ -5,7 +5,6 @@ import { Wron, Wron__factory } from '../../contracts';
 import { WalletInfo } from '../../types';
 import { getContract } from '../../utils/contract';
 import tryParseCurrencyAmount from '../../utils/try-parse-currency-amount';
-import { checkIsInsufficientRonBalance } from '../utils';
 
 type WrapRonArgs = {
   chainId: ChainId;
@@ -26,20 +25,10 @@ const wrapRon = async ({ amount, chainId, wallet }: WrapRonArgs): Promise<Contra
     throw new Error('Could not parse amount');
   }
 
-  const { isInsufficient: isInsufficientRonBalance, ronBalance } = await checkIsInsufficientRonBalance({
-    account: wallet.account,
-    chainId,
-    amount: parsedAmount.quotient.toString(),
-  });
-
-  if (isInsufficientRonBalance) {
-    throw new Error(`Insufficient RON balance: ${ronBalance?.toString()}`);
-  }
-
   const wronContract = getContract({
     address: DEFAULT_ERC20[chainId].WRON.address,
     ABI: Wron__factory.createInterface(),
-    provider: wallet.provider,
+    ...wallet,
   }) as Wron;
 
   if (!wronContract) {
