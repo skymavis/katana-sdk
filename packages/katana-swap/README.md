@@ -248,7 +248,7 @@ const { ronBalance, isInsufficient: isInsufficientRONBalance } = await checkIsIn
 const { tokenBalance: axsBalance, isInsufficient: isInsufficientTokenBalance } = await checkIsInsufficientBalance({
     chainId,
     account: wallet.account,
-    token
+    tokenAddress: tokenInAddress,
     amount,
 });
 
