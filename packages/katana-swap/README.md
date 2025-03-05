@@ -4,7 +4,7 @@
 The Katana Swap SDK enables developers to easily integrate token swapping functionality into their applications on the Ronin blockchain. This SDK provides all the necessary tools to interact with Katana's decentralized exchange features, allowing seamless ERC20 token swaps.
 
 ## Quickstart/Playground
-[Playground](/apps/example/): tbd
+[Playground](https://github.com/skymavis/sdk-examples) 
 
 ## Installation
 
