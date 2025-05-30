@@ -1,6 +1,5 @@
 import { Currency, CurrencyAmount } from '@uniswap/sdk-core';
 import { parseUnits } from 'ethers/lib/utils';
-import JSBI from 'jsbi';
 
 function truncateValue(value: string, decimals: number): string {
   const parts = value.split(/[.,]/);
@@ -25,7 +24,7 @@ export default function tryParseCurrencyAmount<T extends Currency>(
   try {
     const typedValueParsed = parseUnits(truncateValue(value, currency.decimals), currency.decimals).toString();
     if (typedValueParsed !== '0') {
-      return CurrencyAmount.fromRawAmount(currency, JSBI.BigInt(typedValueParsed));
+      return CurrencyAmount.fromRawAmount(currency, typedValueParsed);
     }
   } catch (error) {
     // fails if the user specifies too many decimal places of precision (or maybe exceed max uint?)
