@@ -17,8 +17,6 @@ type SwapArgs = {
   permitSignature?: PermitSignature;
   slippageTolerance?: Percent;
   txDeadlineInSeconds?: number;
-  onSubmitted?: (txHash: string) => void;
-  onSuccess?: (receipt: any) => void;
 };
 
 /**
@@ -29,9 +27,7 @@ type SwapArgs = {
  * @param permitSignature - The permit signature of the input token (Optional)
  * @param txDeadlineInSeconds - The transaction deadline in seconds (Optional, default: 30 minutes)
  * @param slippageTolerance - The slippage tolerance for the swap (Optional, default: 0.50%)
- * @param onSubmitted - Callback when the transaction is submitted (Optional)
- * @param onSuccess - Callback when the transaction is successful (Optional)
- * @returns Transaction receipt
+ * @returns Transaction response
  */
 const swap = async ({
   chainId,
@@ -40,8 +36,6 @@ const swap = async ({
   permitSignature,
   slippageTolerance = DEFAULT_SWAP_SLIPPAGE,
   txDeadlineInSeconds = DEFAULT_TX_DEADLINE,
-  onSubmitted,
-  onSuccess,
 }: SwapArgs) => {
   try {
     const swapOptions = {
@@ -68,17 +62,7 @@ const swap = async ({
     const gasEstimate = await provider.estimateGas(tx);
     tx.gasLimit = calculateGasMargin(gasEstimate);
 
-    const response = await provider.getUncheckedSigner().sendTransaction({ ...tx });
-
-    onSubmitted && onSubmitted?.(response.hash);
-
-    const receipt = await response.wait();
-
-    if (receipt.status === 1) {
-      onSuccess && onSuccess?.(receipt);
-    }
-
-    return receipt;
+    return provider.getSigner(account).sendTransaction({ ...tx });
   } catch (error: any) {
     console.error(toReadableError('Swap failed:', error));
     throw error;
