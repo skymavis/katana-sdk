@@ -2,32 +2,17 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Default",
   "compilerOptions": {
-    "rootDir": "src",
     "composite": false,
     "declaration": true,
-    "declarationMap": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "inlineSources": false,
-    "isolatedModules": true,
-    "moduleResolution": "node",
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "preserveWatchOutput": true,
     "skipLibCheck": true,
-    "strict": true,
     "target": "esnext",
-    "module": "esnext",
-    "jsx": "react",
-    "sourceMap": false,
-    "declarationDir": "dist/types",
+    "allowJs": true,
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
-    "importHelpers": true,
-    "lib": [
-      "dom",
-      "esnext"
-    ],
+    "moduleDetection": "force",
+    "isolatedModules": true,
+    "noUncheckedIndexedAccess": true,
+    "module": "NodeNext"
   },
   "include": [
     "src"

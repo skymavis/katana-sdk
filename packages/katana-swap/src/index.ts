@@ -5,4 +5,5 @@ import { QuoteIntent, SwapRouterNativeAssets } from './constants/enum';
 
 export * from './functions';
 export * from './types';
+export { getQuoteQueryParams, transformQuoteToTrade } from './utils/routing-api';
 export { DEFAULT_ERC20, QuoteIntent, SwapRouterNativeAssets, TradeType };
