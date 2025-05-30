@@ -14,7 +14,7 @@ import { signTypedData } from '../../../utils/sign-typed-data';
  */
 const signPermitAllowance = async ({ chainId, wallet, permit }: SignPermitAllowanceArgs): Promise<PermitSignature> => {
   try {
-    const signer = wallet.provider.getSigner();
+    const signer = wallet.provider.getSigner(wallet.account);
     const signerChainId = await signer.getChainId();
 
     if (chainId !== signerChainId) {
