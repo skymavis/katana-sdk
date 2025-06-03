@@ -1,6 +1,6 @@
 {
   "name": "@sky-mavis/katana-swap",
-  "version": "0.0.4-alpha",
+  "version": "0.0.4-alpha.0",
   "description": "Katana Swap SDK",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
